@@ -1,0 +1,73 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopConsumeGoodsOrder/"}){ -->
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>提示</legend>
+</fieldset>
+
+<form class="layui-form layui-form-pane" id="cancelOrderForm">
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="text-align:center; color: red; size: A3;">
+            无论商品是否发货，订单取消后订单实付金额将退回至用户电商账户余额，您确定要取消此订单吗？
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label" style="width: 180px;">订单状态</label>
+				<div class="layui-input-inline">
+					<input type="text" id="status" name="status"  value="${shopConsumeGoodsOrderVo.statusText}" class="layui-input"  disabled="disabled" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label" style="width: 180px;">剩余可退运费金额</label>
+				<div class="layui-input-inline">
+					<input type="text" id="freightAmount" name="freightAmount"  value="${shopConsumeGoodsOrderVo.freightAmount}" disabled="disabled"  class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label" style="width: 180px;">是否退还运费</label>
+				<div class="layui-input-inline">
+                    <input type="radio" id="reFreight" name="reFreight" value="0" title="否" checked="checked" >
+                    <input type="radio" id="reFreight" name="reFreight" value="1" title="是" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label" style="width: 180px;">退还运费金额</label>
+				<div class="layui-input-inline">
+					<input type="text" id="reFreightAmount" name="reFreightAmount"  value="${shopConsumeGoodsOrderVo.reFreightAmount}"  class="layui-input"
+                           onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">
+				</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">退货原因</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="backReason">${shopConsumeGoodsOrderVo.backReason}</textarea>
+        </div>
+    </div>
+
+
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="id" value=${shopConsumeGoodsOrderVo.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['cancelOrder'], function(){
+    var cancelOrder = layui.cancelOrder
+    cancelOrder.init();
+});
+
+</script>

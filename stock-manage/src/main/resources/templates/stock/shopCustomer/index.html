@@ -1,0 +1,21 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/stock/shopCustomer/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<div class="layui-btn-group">
+    <!--<layui:accessButton function="shopCustomer.add"  action="add">增加</layui:accessButton>-->
+    <!--<layui:accessButton function="shopCustomer.edit"  action="edit">编辑</layui:accessButton>-->
+    <layui:accessButton function="shop.shopCustomer.detail"  action="detail">详情</layui:accessButton>
+    <!--<layui:accessButton function="shopCustomer.del"  action="del">删除</layui:accessButton>-->
+</div>
+
+<table id="shopCustomerTable" lay-filter="shopCustomerTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

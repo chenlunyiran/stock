@@ -1,0 +1,22 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/stock/shopExchangeOrder/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<!--<div class="layui-btn-group">
+    <layui:accessButton function="shopExchangeOrder.add"  action="add">增加</layui:accessButton>
+    <layui:accessButton function="shopExchangeOrder.edit"  action="edit">编辑</layui:accessButton>
+    <layui:accessButton function="shopExchangeOrder.del"  action="del">删除</layui:accessButton>
+     <layui:accessButton function="shopExchangeOrder.exportDocument"  action="exportDocument">导出</layui:accessButton>
+     <layui:accessButton function="shopExchangeOrder.importDocument"  action="importDocument">导入</layui:accessButton>
+</div>-->
+
+<table id="shopExchangeOrderTable" lay-filter="shopExchangeOrderTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

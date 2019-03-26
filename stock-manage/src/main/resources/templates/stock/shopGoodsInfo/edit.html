@@ -1,0 +1,207 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopGoodsInfo/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">SKU</label>
+				<div class="layui-input-inline">
+					<input type="text" id="sku" name="sku"  value="${shopGoodsInfo.sku}"   class="layui-input" disabled="disabled">
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+    	<div class="layui-form-item">
+     		<div class="layui-inline">
+            <label class="layui-form-label">商品名称</label>
+				<div class="layui-input-inline">
+				<textarea  lay-verify="required" name="name" style="width: 1000px; min-height: 200px;"  required lay-verify="required" placeholder="请输入" class="layui-textarea">${shopGoodsInfo.name}</textarea>
+					<!-- <input type="text" id="name" name="name"  value="${shopGoodsInfo.name}"   class="layui-input" > -->
+				</div>
+            </div>
+         </div>
+     </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">供应商</label>
+				<div class="layui-input-inline">
+					<input type="text" id="ename" name="e.ename"  value="${shopGoodsInfo.ename}"   class="layui-input" disabled="disabled">
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">类目</label>
+				<div class="layui-input-inline">
+					<input type="text" id="vname" name="v.vname"  value="${shopGoodsInfo.vname}"   class="layui-input" disabled="disabled">
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <label class="layui-form-label">运费模板</label>
+            <div class="layui-inline" lay-filter="shopTransportTemplatesSelect">
+                <select id="shopTransportTemplatesSelect" name="transportId">
+                    <option value="">请选择运费模板</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">进价(元)</label>
+				<div class="layui-input-inline">
+					<input type="text" id="purchasePrice" name="purchasePrice"  value="${shopGoodsInfo.purchasePrice}"   class="layui-input" disabled="disabled" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label" style="width:112px;">单价(消费金)</label>
+				<div class="layui-input-inline">
+					<input type="text" id="sellPrice" name="sellPrice"  value="${shopGoodsInfo.sellPrice}"   class="layui-input" >
+				</div>
+				 <div class="layui-inline">
+                    <div class="layui-inline layui-form-mid layui-word-aux">（兑付比例不低于 1:${minRatio}<span style="color: red" id="minRatioSpan"></span>)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">库存量</label>
+				<div class="layui-input-inline">
+					<input type="text" id="totalQuantity" name="totalQuantity"  value="${shopGoodsInfo.totalQuantity}"   class="layui-input" disabled="disabled">
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">可用库存量</label>
+				<div class="layui-input-inline">
+					<input type="text" id="avaliableQuantity" name="avaliableQuantity"  value="${shopGoodsInfo.avaliableQuantity}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <label class="layui-form-label">上架方式</label>
+            <div class="layui-inline">
+                <select lay-verify="required" lay-filter="launchTypeSelect" id="launchTypeSelect" value="${shopGoodsInfo.launchType}" name="launchType">
+                    <option value="1">立即上架</option>
+                    <option value="2">定时上架</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="launchTime" class="layui-row layui-hide">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">上架时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" value="${shopGoodsInfo.launchStartTime}" name="launchStartTime" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">下架时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" value="${shopGoodsInfo.launchEndTime}" name="launchEndTime" class="layui-input" id="test6" placeholder="yyyy-MM-dd HH:mm:ss" readonly="readonly">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${shopGoodsInfo.delFlag} />
+    <input type="hidden" name="id" value=${shopGoodsInfo.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var shopGoodsInfoEdit = layui.edit
+    var laydate = layui.laydate;
+    shopGoodsInfoEdit.init();
+    //日期时间选择器
+    laydate.render({
+      elem: '#test5'
+      ,type: 'datetime'
+    });
+  //日期时间选择器
+    laydate.render({
+      elem: '#test6'
+      ,type: 'datetime'
+    });
+    var shopTransportTemplates = '${shopTransportTemplates}';
+    var t = '${shopGoodsInfo.transportId}';
+    $.each(JSON.parse(shopTransportTemplates), function (index,item) {
+        if (item.id == t){
+            $("#shopTransportTemplatesSelect").append('<option selected="selected" value="'+item.id+'" >'+item.name+'('+ item.transportStyle + ')'+ '</option>')
+        }else {
+            $("#shopTransportTemplatesSelect").append('<option value="'+item.id+'" >'+item.name+'('+ item.transportStyle + ')'+ '</option>')
+
+        }
+    });
+
+    var launchType = '${shopGoodsInfo.launchType}';
+    if (launchType == 2){//定时上架显示时间
+        $("#launchTypeSelect").val(launchType);
+        $("#launchTime").attr("class","layui-row layui-show");
+    }
+
+    layui.form.render('select');
+
+    layui.form.on('select(launchTypeSelect)', function(data){
+       if (data.value == 2){
+           $("#launchTime").attr("class","layui-row layui-show");
+       }else {
+           $("#launchTime").attr("class","layui-row layui-hide");
+       }
+    });
+    $("#purchasePrice").change(function() {
+        setSellPriceWithPurchasePrice();
+    });
+    $("#sellPrice").change(function() {
+        setSellPriceWithSellPrice();
+    });
+
+});
+//进价金额改变， 联动修改
+function setSellPriceWithPurchasePrice() {
+    var minRatio = parseInt('${minRatio}');
+    var purchasePrice = $("#purchasePrice").val();
+    var sellPrice = $("#sellPrice").val();
+
+    if (purchasePrice == null){
+        purchasePrice = 0;
+        sellPrice = 0;
+    }
+
+    var minSellPrice = Number(purchasePrice)*minRatio;
+    $("#minRatioSpan").text(' 最小：'+minSellPrice);
+
+    if (minSellPrice > Number(sellPrice)) {
+        $("#sellPrice").val(null);
+    }
+}
+
+//售价金额改变，联动判断
+function setSellPriceWithSellPrice() {
+    var minRatio = parseInt('${minRatio}');
+    var purchasePrice = $("#purchasePrice").val();
+    var sellPrice = $("#sellPrice").val();
+
+    if (purchasePrice == null){
+        purchasePrice = 0;
+    }
+    var minSellPrice = Number(purchasePrice)*minRatio;
+    $("#minRatioSpan").text(' 最小：'+minSellPrice);
+
+    if (minSellPrice > Number(sellPrice)) {
+        Common.info("单价小于最低售价！"+minSellPrice);
+        $("#sellPrice").val(null);
+    }
+}
+</script>

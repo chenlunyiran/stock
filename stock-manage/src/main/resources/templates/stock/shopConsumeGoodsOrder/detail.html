@@ -1,0 +1,112 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopConsumeGoodsOrder/"}){ -->
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>订单信息</legend>
+    </fieldset>
+
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: auto"><h3>订单编号：</h3></label>
+                <label class="layui-form-label" style="text-align:left; color: red; size: A3">
+                    ${shopConsumeGoodsOrderVo.consumeGoodsOrderId}
+                </label>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: auto;margin-left: 200px;"><h3>支付订单号：</h3></label>
+                <label class="layui-form-label" style="text-align:left; color: red; size: A3;">
+                    ${shopConsumeGoodsOrderVo.payOrderId}
+                </label>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: auto"><h3>订单状态：</h3></label>
+                <label class="layui-form-label" style="text-align:left; color: red; size: A3">
+                    ${shopConsumeGoodsOrderVo.statusText}
+                </label>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: auto;margin-left: 200px;"><h3>实付款：</h3></label>
+                <label class="layui-form-label" style="text-align:left; color: red; size: A3">
+                    ${shopConsumeGoodsOrderVo.amount}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form">
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>SKU</th>
+                <th>商品名称</th>
+                <th>供应商</th>
+                <th>单价(消费金)</th>
+                <th>数量</th>
+                <th>小计(消费金)</th>
+                <th>运费(消费金)</th>
+                <th>快递单号</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>${shopConsumeGoodsOrderVo.sku}</td>
+                <td>${shopConsumeGoodsOrderVo.goodsName}</td>
+                <td>${shopConsumeGoodsOrderVo.supplierName}</td>
+                <td>${shopConsumeGoodsOrderVo.price}</td>
+                <td>${shopConsumeGoodsOrderVo.count}</td>
+                <td>${shopConsumeGoodsOrderVo.amount}</td>
+                <td>${shopConsumeGoodsOrderVo.freightAmount}</td>
+                <td>${shopConsumeGoodsOrderVo.logisticsCompany}：${shopConsumeGoodsOrderVo.logisticsNum}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>物流信息</legend>
+    </fieldset>
+
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header"><strong>收货地址</strong></div>
+                    <div class="layui-card-body">
+                        ${shopConsumeGoodsOrderVo.contactName}<br>
+                        ${shopConsumeGoodsOrderVo.contactPhone}<br>
+                        ${shopConsumeGoodsOrderVo.contactAddress}<br>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header"><strong>物流信息</strong></div>
+                    <div class="layui-card-body">
+                        物流公司：${shopConsumeGoodsOrderVo.logisticsCompany}<br>
+                        运单号：${shopConsumeGoodsOrderVo.logisticsNum}<br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div style="margin-top: 20px; margin-left: 50%;"><layui:closeButton id="close"/></div>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var shopConsumeGoodsOrderEdit = layui.edit
+    shopConsumeGoodsOrderEdit.init();
+});
+</script>

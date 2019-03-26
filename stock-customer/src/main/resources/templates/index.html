@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/touch.css">
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/rem750.js"></script>
+    <script src="js/jquery.SuperSlide.2.1.2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/common/util.js"></script>
+	<script src="/js/common/_LZLH.js"></script>
+    <title>债债GO商城</title>
+	<style type="text/css">
+		html,body{
+			width: 100%;
+			height: 100%;
+			overflow-x: hidden;
+		}
+		.zzg-c{
+
+			width: 100%;
+			height: 100%;
+		}
+		.slide-div{
+			width: 100%;
+			height: 0.96rem;
+
+		}
+		.slide-div .iconBg{
+			width: 0.32rem;
+			height: 0.28rem;
+			float: left;
+			margin: 0.33rem;
+			background: url(img/index/laba.png) no-repeat;
+			background-size:100% 100% ;
+		}
+		.slide-div .cashListCont{
+			height: 0.34rem;
+			padding: 0.3rem 0.4rem 0.3rem 0.92rem;
+		}
+		.slide-div .cashListCont ul li{
+			font-size: 0.24rem;
+			color: #333333;
+			height: 0.4rem;
+		}
+		.slide-div .cashListCont ul li span.date{
+			float: right;
+		}
+
+		.zzg-content ul.shops{
+			width: 100%;
+		}
+		.zzg-content ul.shops .li-1{
+			width: 3.7rem;
+			height: 5.02rem;
+			float: left;
+			margin-bottom: 0.1rem;
+			background: #fff;
+			position: relative;
+		}
+		.zzg-content ul.shops .li-1 .mark-k{
+			display: none;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.3);
+			z-index: 8;
+			top: 0;
+			left: 0;
+		}
+		.zzg-content ul.shops .li-1 .no-circle{
+			position: absolute;
+			width: 0.8rem;
+			height: 0.8rem;
+			border-radius: 50%;
+			border: 1px solid #fff;
+			right: 0.3rem;
+			bottom: 0.3rem;
+			display: none;
+			z-index: 10;
+
+		}
+		.zzg-content ul.shops .li-1 .no-circle p{
+			font-size: 0.24rem;
+			color: #fff;
+			line-height: 0.3rem;
+			text-align: center;
+		}
+		.zzg-content ul.shops .li-1.noKuCun .no-circle,
+		.zzg-content ul.shops .li-1.noKuCun .mark-k{
+			display: block;
+		}
+		.zzg-content ul.shops .li-1 a{
+			width: 100%;
+			height: 100%;
+			display: block;
+			position: absolute;
+			z-index: 1;
+		}
+		.zzg-content ul.shops .li-1:nth-child(even){
+			margin-left: 0.1rem;
+		}
+		.zzg-content ul.shops .li-1 .inbox{
+			width: 3.3rem;
+			height: 3.3rem;
+			margin: 0.2rem;
+			margin-bottom: 0;
+			background: rgba(0,0,0,0.01);
+
+		}
+		.zzg-content ul.shops .li-1 .inbox .in-re{
+			width: 100%;
+			height:100%;
+			position: relative;
+		}
+		.zzg-content ul.shops .li-1 .inbox img{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			z-index: 4;
+		}
+		.zzg-content ul.shops .li-1 .dis{
+			padding: 0.32rem;
+		}
+		.zzg-content ul.shops .li-1 .name{
+			font-size: 0.28rem;
+			color: #333333;
+			height: 0.4rem;
+			line-height: 0.4rem;
+		}
+		.zzg-content ul.shops .li-1 .p-2{
+			float: left;
+			font-size: 0.36rem;
+			color: #FE9901;
+			height: 0.48rem;
+			line-height: 0.48rem;
+		}
+		.zzg-content ul.shops .li-1 .p-2 .span-2{
+			font-size: 0.2rem;
+		}
+		.zzg-content ul.shops .li-1 .p-3{
+			float: right;
+			font-size: 0.2rem;
+			color: #CCCCCC;
+			height: 0.4rem;
+			padding-top: 0.13rem;
+		}
+	</style>
+</head>
+<body>
+    <div class="flex-outer zzg-c">
+    	<!--header-->
+    	<div class="zzg-header px-border-bttom">
+			<div class="back" onclick="LZLH().toCloseWindow()">
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">债债GO商城</div>
+		<!--	<div class="tag">新增</div>-->
+    	</div>
+        <!---->
+		@if(isNotEmpty(goodsOrderList)){
+		<div class="slide-div px-border-bttom">
+        	 <em class="iconBg"></em>
+	    	 <div class="cashListCont" id="bonustable">
+	                  <ul class="bd">
+						  @for(goodsOrder in goodsOrderList){
+						  <li>${goodsOrder.payOrderId}购买了【${goodsOrder.exchangeRule}】 <span class="date">${goodsOrder.customerId}分钟前</span></li>
+						  @}
+	                  </ul>
+	          </div>
+        </div>
+		@}
+        <div class="scroll-content zzg-content">
+        	<ul class="shops clearfix">
+				@if(goodsList==null || goodsList.~size==0){
+				<!-- 暂无商品 -->
+				<li class="li-1"></li>
+				<li class="li-1"></li>
+				@}else{
+				<!-- 有售卖商品  -->
+					@for(goods in goodsList){
+					@if(goods.avaliableQuantity>0){
+					<li class="li-1">
+					@}else{
+					<li class="li-1 noKuCun">
+					@}
+						<a href="/goodsDetail?id=${goods.id}">
+							<div class="inbox">
+								<div class="in-re">
+									<img src="${goods.imgPath}"/>
+									<div class="mark-k"></div>
+									<div class="no-circle">
+										<p style="padding-top: 0.09rem;">暂无</p>
+										<p>库存</p>
+									</div>
+								</div>
+							</div>
+							<div class="dis">
+								<p class="name">${goods.name}</p>
+								<p class="p-2">
+									${goods.sellPrice}
+									<span class="span-2">消费金</span>
+								</p>
+								<p class="p-3">仅剩${goods.avaliableQuantity!0}件</p>
+							</div>
+						</a>
+					</li>
+					@}
+				@}
+        	</ul>
+        </div>
+        <!--footer-->
+        <div class="zzg-footer px-border-top">
+        	<ul class="f">
+        		<li class="active">
+					<a href="javascript:;">
+						<div class="img-1 index"></div>
+						<p class="p-1">首页</p>
+					</a>
+        		</li>
+        		<li>
+        			<a href="/myShopCart">
+        				<div class="img-1 gowuche"></div>
+        				<p class="p-1">购物车</p>
+						@if(cartNum>0){
+						<div class="num"><span>${cartNum}</span></div>
+						@}
+        			</a>      			
+        		</li>
+        		<li>
+        			<a href="/own/home">
+        				<div class="img-1 my"></div>
+        				<p class="p-1">我的</p>
+        			</a>       			
+        		</li>
+        	</ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	$(function(){
+    		 $("#bonustable").slide({//滚动
+		          mainCell: ".bd",
+		          autoPlay: true,
+		          effect: "topMarquee",
+		          vis: 1,
+		          interTime: 100,
+		          trigger: "click",
+		          mouseOverStop:false
+		      });
+    	})
+    </script>
+</body>
+</html>

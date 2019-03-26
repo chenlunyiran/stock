@@ -1,0 +1,74 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopConsConfig/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">标识</label>
+				<div class="layui-input-inline">
+					<input type="text" id="nid" name="nid"  value="${shopConsConfig.nid}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">名称</label>
+				<div class="layui-input-inline">
+					<input type="text" id="name" name="name"  value="${shopConsConfig.name}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">值</label>
+				<div class="layui-input-inline">
+					<input type="text" id="value" name="value"  value="${shopConsConfig.value}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">描述</label>
+				<div class="layui-input-inline">
+					<input type="text" id="description" name="description"  value="${shopConsConfig.description}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">状态</label>
+				<div class="layui-input-inline">
+                    <select name="status" lay-filter="aihao" id="status" lay-verify="required">
+                        <option value="1">启用</option>
+                        <option value="0">停用</option>
+                    </select>
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" id="remark" name="remark"  value="${shopConsConfig.remark}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${shopConsConfig.delFlag} />
+    <input type="hidden" name="id" value=${shopConsConfig.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var shopConsConfigEdit = layui.edit
+    shopConsConfigEdit.init();
+
+    var value='${shopConsConfig.status}';
+    $("#status").val(value);
+    layui.form.render('select');
+});
+</script>

@@ -1,0 +1,112 @@
+app:
+    name: stock-manager
+audit:
+    enable: false
+beetl:
+    suffix: html
+beetlsql:
+    basePackage: com
+    dataSource:
+        dbStyle: org.beetl.sql.core.db.MySqlStyle
+logging:
+    config: classpath:log4j2.xml
+server:
+    port: 8082
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    cache:
+        type: redis
+    datasource:
+        name: dataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: root
+        url: jdbc:mysql://127.0.0.1/shop?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
+        username: root
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari:
+            auto-commit: true
+            connection-test-query: SELECT 2
+            connection-timeout: 30000
+            idle-timeout: 30000
+            max-lifetime: 1800000
+            maximum-pool-size: 16
+            minimum-idle: 5
+            pool-name: HikariCPPool
+    data:
+        jpa:
+          repositories:
+              enabled: true
+          database: MYSQL
+          database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+          generate-ddl: false
+          open-in-view: false
+          show-sql: false
+          properties:
+            hibernate:
+              ddl-auto: none
+              naming:
+                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+                physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    devtools:
+        restart:
+            exclude: static/**,templates/**
+    session:
+        store-type: redis
+    redis:
+        database: 3
+        timeout: 10000
+        host: 127.0.0.1
+        port: 6379
+        password: 123456
+        pool:
+          max-active: 25
+          max-wait: -1
+          max-idle: 10
+          min-idle: 0
+
+mybatis:
+    config-location: classpath:MyBatis.xml
+    check-config-location: true
+    mapper-locations: classpath*:com/twotiger/stock/core/mapper/*.xml
+    type-aliases-package: com.twotiger.stock.core.entity
+    type-handlers-package: com.twotiger.stock.core.typehandler
+    executor-type: REUSE
+mapper:
+    mappers:
+        - com.twotiger.stock.db.mybatis.NoExampleMapper
+    not-empty: false
+    identity: MYSQL
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+user:
+    id: 1
+    orgId: 1
+
+oss:
+  endpoint: oss-cn-beijing.aliyuncs.com
+  access_key_id: LTAIJT7DqRgpUS2w
+  access_key_secret: nJpGoPASPH4coDknlou4dm2un8KE22
+  bucket_name: tiger-stock-test
+#
+#oss:
+#  endpoint: oss-cn-beijing.aliyuncs.com
+#  access_key_id: LTAIaI5tjrXKgHn6
+#  access_key_secret: IiSAGHrcpiwVcoxTAxC5ib3SmP0z2G
+#  bucket_name: fangxd-test
+
+aliyun:
+  ons:
+    producer: false
+    producer-id: PID_tt_stock_test
+    consumer: false
+    consumer-id: CID_tt_stock_test
+    access-key: LTAIJT7DqRgpUS2w
+    secret-key: nJpGoPASPH4coDknlou4dm2un8KE22
+    topic: tt_stock_test
+
+
+

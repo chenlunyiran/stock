@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <description>JPA ORM</description>
+    <bean id="persistenceProvider" class="org.hibernate.jpa.HibernatePersistenceProvider"/>
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceProvider" ref="persistenceProvider"/>
+        <property name="packagesToScan" value="com.twotiger.stock.core.entity"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="database" value="MYSQL"></property>
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQL55Dialect"></property>
+                <property name="showSql" value="false"/>
+                <property name="generateDdl" value="false"/>
+            </bean>
+        </property>
+    </bean>
+    <!-- 将加有Repository注解的使用JPA或者Hibernate原生API的方法所抛出的异常转化为Spring的DataAccessException中的异常 -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"></bean>
+
+    <!-- 事物管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"></property>
+        <property name="defaultTimeout" value="5"/>
+    </bean>
+    <!-- 事物管理器 -->
+    <!-- 支持注解型事物 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <!-- 引入事物规则 -->
+    <!-- 拦截器方式配置事物 -->
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--写入-->
+            <tx:method name="add*" 		propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <tx:method name="insert*" 	propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <tx:method name="save*" 	propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <tx:method name="update*" 	propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <tx:method name="modify*" 	propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <tx:method name="edit*" 	propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <tx:method name="delete*" 	propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <tx:method name="remove*" 	propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <!--以UseWrite结尾的查询使用写库-->
+            <tx:method name="*UseWrite" propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"   rollback-for="RuntimeException"/>
+            <!--读取-->
+            <tx:method name="count*" 	propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="exists*" 	propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="has*" 		propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="list*" 	propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="select*" 	propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="query*" 	propagation="SUPPORTS" isolation="DEFAULT" read-only="true"  />
+            <tx:method name="get*" 		propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="find*" 	propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="load*" 	propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="search*" 	propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <tx:method name="datagrid*" propagation="SUPPORTS" isolation="DEFAULT" read-only="true" />
+            <!--需要事物的能通过异常被发现，再增加配置-->
+            <!--<tx:method name="*" 		propagation="SUPPORTS" isolation="DEFAULT" read-only="true"/>-->
+            <!--这种可能查询都增加了事物,而不会被发现-->
+            <tx:method name="*" propagation="REQUIRED" isolation="READ_COMMITTED" read-only="false"  rollback-for="RuntimeException"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 定义事物的切点 -->
+    <aop:config>
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.twotiger.stock.core.service.impl..*.*(..))" />
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPointcut" />
+    </aop:config>
+</beans>

@@ -1,0 +1,20 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/stock/shopCustomerAccountLog/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<!--<div class="layui-btn-group">-->
+    <!--&lt;!&ndash;<layui:accessButton function="shopCustomerAccountLog.add"  action="add">增加</layui:accessButton>&ndash;&gt;-->
+    <!--&lt;!&ndash;<layui:accessButton function="shopCustomerAccountLog.edit"  action="edit">编辑</layui:accessButton>&ndash;&gt;-->
+    <!--&lt;!&ndash;<layui:accessButton function="shopCustomerAccountLog.del"  action="del">删除</layui:accessButton>&ndash;&gt;-->
+<!--</div>-->
+
+<table id="shopCustomerAccountLogTable" lay-filter="shopCustomerAccountLogTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

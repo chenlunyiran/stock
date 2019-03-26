@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/touch.css">
+    <title>消费金流水</title>
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script src="/js/common/util.js"></script>
+    <script src="/js/common/moment.min.js"></script>
+    <script language="javascript">
+        $(document).ready(function(){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize);})
+        $(window).resize(function(e){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize)});
+    </script>
+    <style>
+        body{height: 100%;}
+        .xfjls{width:7.5rem;/*min-height: 100%;*/margin:0 auto;background: #f7f7f7;padding-top:.2rem;}
+        .use_xfj{width:6.7rem;height:1.2rem;line-height: 1.2rem;background: #fff;padding:0 .4rem;margin:0 auto;}
+        .use_xfj span{font-size: .32rem;color: #333;}
+        .use_xfj em{font-size: .36rem;color: #333;}
+        .xfjls_list{margin-top: .2rem;padding-left: .4rem;background: #fff;}
+        .xfjls_info{padding:.3rem .4rem .3rem 0;}
+        .xfjls_info>div p{font-size: .32rem;color: #333;line-height: .6rem;}
+        .xfjls_info>div strong{font-size: .36rem;line-height: .6rem;}
+        .xfjls_info p em{font-size: .28rem;line-height:.4rem;color: #3F3F3F;}
+    </style>
+	<script type="text/javascript">
+		var data=${data};
+	</script>
+</head>
+<body>
+	<div class="flex-outer">
+		<!--header-->
+    	<div class="zzg-header px-border-bttom">
+    		<div class="back"  onclick="window.location.href='/own/home'">
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">消费金流水</div>
+		<!--	<div class="tag">新增</div>-->
+    	</div>
+    	<div class="scroll-content">
+            <div class="xfjls">
+                    <p class="clearfix use_xfj"><span class="db fl">可用消费金</span><em class="db fr">${total,numberFormat="##,###.##"}</em></p>
+                    <div class="xfjls_list" id="dataDiv"></div>
+                    <p id="moreBtn" class="click-more">点击加载更多</p>
+            </div>
+		</div>
+    </div>
+	<script src="/js/expense/expense.js"></script>
+</body>
+</html>

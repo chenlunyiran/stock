@@ -1,0 +1,89 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopExchangeOrder/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">客户ID</label>
+				<div class="layui-input-inline">
+					<input type="text" id="customerId" name="customerId"  value="${shopExchangeOrder.customerId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">类型</label>
+				<div class="layui-input-inline">
+					<input type="text" id="type" name="type"  value="${shopExchangeOrder.type}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">本次操作涉及金额</label>
+				<div class="layui-input-inline">
+					<input type="text" id="amount" name="amount"  value="${shopExchangeOrder.amount}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">状态</label>
+				<div class="layui-input-inline">
+					<input type="text" id="status" name="status"  value="${shopExchangeOrder.status}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">订单编号</label>
+				<div class="layui-input-inline">
+					<input type="text" id="thirdExchangeOrderId" name="thirdExchangeOrderId"  value="${shopExchangeOrder.thirdExchangeOrderId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">兑换规则</label>
+				<div class="layui-input-inline">
+					<input type="text" id="exchangeRule" name="exchangeRule"  value="${shopExchangeOrder.exchangeRule}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createTime" name="createTime"  value="${shopExchangeOrder.createTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">更新时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="updateTime" name="updateTime"  value="${shopExchangeOrder.updateTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" id="remark" name="remark"  value="${shopExchangeOrder.remark}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${shopExchangeOrder.delFlag} />
+    <input type="hidden" name="id" value=${shopExchangeOrder.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var shopExchangeOrderEdit = layui.edit
+    shopExchangeOrderEdit.init();
+});
+</script>

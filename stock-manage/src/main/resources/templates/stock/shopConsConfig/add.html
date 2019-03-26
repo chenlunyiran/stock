@@ -1,0 +1,67 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopConsConfig/"}){ -->
+
+<form class="layui-form layui-form-pane" id="addForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">标识</label>
+				<div class="layui-input-inline">
+					<input type="text" name="nid" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">名称</label>
+				<div class="layui-input-inline">
+					<input type="text" name="name" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">值</label>
+				<div class="layui-input-inline">
+					<input type="text" name="value" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">描述</label>
+				<div class="layui-input-inline">
+					<input type="text" name="description" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">状态</label>
+				<div class="layui-input-inline">
+                    <select name="status" lay-filter="aihao" id="status" lay-verify="required">
+                        <option value="1" selected="selected">启用</option>
+                        <option value="0">停用</option>
+                    </select>
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" name="remark" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <layui:submitButtons id="addButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['add'], function(){
+    var shopConsConfigAdd = layui.add
+    shopConsConfigAdd.init();
+});
+</script>

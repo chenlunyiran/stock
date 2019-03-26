@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/touch.css">
+    <title>流水详情</title>
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script language="javascript">
+        $(document).ready(function(){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize);})
+        $(window).resize(function(e){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize)});
+    </script>
+    <style>
+        .lsxq_cont{background: #fff;}
+        .lsxq_cont ul{padding:.2rem .4rem;border-top:0.2rem solid #F7F7F7;}
+        .lsxq_cont ul li{margin-top: .2rem;line-height: .44rem;font-size: .32rem;}
+        .lsxq_cont ul li p{color: #999;float:left}
+        .lsxq_cont ul li span{float:right;color: #333;}
+    </style>
+    
+</head>
+<body>
+
+	<div class="flex-outer">
+		
+	<!--header-->
+    	<div class="zzg-header px-border-bttom">
+    		<div class="back"  onclick="window.location.href='/own/expenseLogView'">
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">流水详情</div>
+			<!--<a class="tag" href="addAdress.html">新增</a>-->
+    	</div>
+    <div class="scroll-content lsxq_cont">
+        @switch(type){
+            @case 1:
+                <ul>
+                    <li class="clearfix"><p>时间</p><span>${shopExchangeOrder.createTime,dateFormat="yyyy-MM-dd hh:mm:ss"}</span></li>
+                    <li class="clearfix"><p>类型</p><span>兑换</span></li>
+                    <li class="clearfix"><p>金额</p><span>${shopExchangeOrder.consumeAmount}</span></li>
+                    <li class="clearfix"><p>平台</p><span>${shopExchangeOrder.exchangeChannel=='twotiger'?'两只老虎':'我能理财'}</span></li>
+                </ul>
+                @break;
+            @case 2:
+                @for(shopConsumeGoodsOrder in shopConsumeGoodsOrders){
+                    <ul>
+                        <li class="clearfix"><p>时间</p><span>${shopConsumeGoodsOrder.createTime,dateFormat="yyyy-MM-dd hh:mm:ss"}</span></li>
+                        <li class="clearfix"><p>类型</p><span>消费</span></li>
+                        <li class="clearfix"><p>金额</p><span>${shopConsumeGoodsOrder.price*shopConsumeGoodsOrder.count+shopConsumeGoodsOrder.freightAmount}</span></li>
+                        <li class="clearfix"><p>订单号</p><span>${shopConsumeGoodsOrder.consumeGoodsOrderId}</span></li>
+                    </ul>
+                @}
+                @break;
+            @case 3:
+                <ul>
+                    <li class="clearfix"><p>时间</p><span>${shopConsumeGoodsOrder.createTime,dateFormat="yyyy-MM-dd hh:mm:ss"}</span></li>
+                    <li class="clearfix"><p>类型</p><span>消费</span></li>
+                    <li class="clearfix"><p>金额</p><span>${shopConsumeGoodsOrder.price*shopConsumeGoodsOrder.count+shopConsumeGoodsOrder.freightAmount}</span></li>
+                    <li class="clearfix"><p>订单号</p><span>${shopConsumeGoodsOrder.consumeGoodsOrderId}</span></li>
+                </ul>
+                @break;
+        @}
+    </div>
+    </div>
+</body>
+</html>

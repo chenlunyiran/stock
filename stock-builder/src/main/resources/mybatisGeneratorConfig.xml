@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--see http://generator.sturgeon.mopaas.com/configreference/ -->
+
+    <!--properties元素用于指定一个需要在配置中解析使用的外部属性文件。 属性配置中的任何属性将接受 ${property} 这种形式的属性。-->
+    <!--resource 属性文件的全限定名称。当指定了resource属性，将会从classpath下面搜索属性文件。-->
+    <!--url 属性文件的URL值。这可以用于指定一个属性文件在文件系统上的特定位置-->
+    <!--<properties resource="mybatisGeneratorConfig.properties"/>-->
+
+    <!--context 该元素只有一个必选属性id，context唯一的标识符。此值将用于某些错误消息。-->
+    <!--introspectedColumnImpl使用这个值去指定一个继承了org.mybatis.generator.api.IntrospectedColumn类的权限定名称。 这可以修改代码生成器计算列信息时候的行为。-->
+    <context id="twotiger" defaultModelType="flat" targetRuntime="MyBatis3">
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="utf-8"/>
+        <!--如果想使用模板来定制生成的java文件和xml文件的样式，你可以通过指定这两个属性的值来实现-->
+        <property name="javaFormatter" value=""/>
+        <property name="xmlFormatter" value=""/>
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+            <property name="suppressJavaInterface" value="false"/>
+        </plugin>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="com.twotiger.shop.util.MyBatisJpaMapperPlugin">
+            <property name="mappers" value="NoExampleMapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+        <!-- 注释处理器 type 使用用户指定提供的注释生成器类型。 这个类必须继承org.mybatis.generator.api.CommentGenerator接口。 而且必须有一个默认的构造函数  默认 DEFAULT（DefaultCommentGenerator）-->
+        <commentGenerator type="com.twotiger.shop.util.MybatidJpaCommentGenerator">
+            <property name="suppressAllComments" value="false"/><!-- 阻止生成注释 默认为false -->
+            <property name="suppressDate" value="false" /> <!-- 阻止生成的注释包含时间戳，默认为false-->
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://rm-2ze6s3yp67789ex92xo.mysql.rds.aliyuncs.com/shop"
+                        userId="root"
+                        password="test1@34">
+            <!-- 针对mysql数据库 读取表元信息-->
+            <property name="useInformationSchema" value="true"></property>
+        </jdbcConnection>
+
+
+        <javaTypeResolver type="DEFAULT">
+            <!-- 是否强制使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <!--Java类型解析器不应该强制型对象字段BigDecimal的使用，这意味着整数类型(短、整型、长等)如果可能的话将被取代。 此功能是为了使数据库DECIMAL和NUMERIC列容易处理-->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--
+         Java模型生成器应该使用子包。 这意味着在这种情况下生成的模型对象将被放置在名为 test.model.db2admin 的包中（因为表在 DB2ADMIN schema中）。
+         如果 enableSubPackages 属性设置为 false， 那么包名将会是 test.model。 Java模型生成器也应该对字符串进行trim操作。
+         这意味着任何字符串属性的setter方法将调用trim方法 - 如果您的数据库可能会在字符末尾返回空白符，这是非常有用的。
+        -->
+        <javaModelGenerator targetPackage="com.twotiger.shop.core.entity" targetProject="D:/test">
+            <property name="constructorBased" value="false"/>
+            <property name="enableSubPackages" value="false" />
+            <property name="immutable" value="false"/>
+            <property name="trimStrings" value="true" />
+            <property name="rootClass" value="com.ibeetl.admin.core.entity.BaseEntity"/>
+        </javaModelGenerator>
+
+        <!--SQL映射生成器将使用子包。这意味着这种情况下生成的XML文件将被放置在名为 test.xml.db2admin 的包中（因为表在 DB2ADMIN schema中）。
+         如果 enableSubPackages 属性设置为 false， 那么包名将会是 test.xml
+        -->
+        <sqlMapGenerator targetPackage="com.twotiger.shop.core.mapper" targetProject="D:/test">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!--
+        MyBatis3:
+            ANNOTATEDMAPPER:基于注解的Mapper接口，不会有对应的XML映射文件
+            MIXEDMAPPER:XML和注解的混合形式，(上面这种情况中的)SqlProvider注解方法会被XML替代。
+            XMLMAPPER:所有的方法都在XML中，接口调用依赖XML文件。
+        -->
+         <!--初始化时生成Mapper接口 更新字段时需要注意： 不要要生成会覆盖自定义方法-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.twotiger.shop.core.mapper" targetProject="D:/test">
+            <property name="enableSubPackages" value="false"/>
+            <!--rootInterface用于指定一个所有生成的接口都继承的父接口。 这个值可以通过<table>配置的rootInterface属性覆盖。-->
+            <!--<property name="rootInterface" value="${mapper.Mapper}"/>-->
+        </javaClientGenerator>
+
+
+        <!-- 配置表信息 http://generator.sturgeon.mopaas.com/configreference/table.html-->
+        <!--<table schema="schema" tableName="tbname" domainObjectName="entityName">-->
+            <!--属性驼峰处理-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<generatedKey column="ID" sqlStatement="JDBC" identity="true" />-->
+            <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample 是否生成 example类   -->
+            <!--<property name="rootClass" value=""/>-->
+            <!--<property name="rootInterface" value=""/>-->
+            <!-- 忽略列，不生成bean 字段 -->
+            <!--<ignoreColumn column="FRED" />-->
+            <!-- 指定列的java数据类型 -->
+            <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
+            <!--MySql支持有符号，无符号，数字类型字段。这些不是JDBC类型，因此MyBatis 生成器不能自动转换这种类型的字段。JAVA数据类型都是有符号的， 当使用无符号类型时这就会导致缺失精度。
+            可以使用 <columnOverride> 解决MySql无符号数值类型的字段。下面是一个如何处理无符号bigint字段类型例子:-->
+            <!--<columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG" />-->
+            <!--属性重命名-->
+            <!--<columnRenamingRule searchString="^CUST_" replaceString="" />-->
+        <!--</table>-->
+
+        <!--<table schema="stock" tableName="shop_customer" domainObjectName="ShopCustomer">-->
+            <!--&lt;!&ndash;属性驼峰处理&ndash;&gt;-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <table schema="shop" tableName="shop_goods_info" domainObjectName="ShopGoodsInfo">
+            <!--属性驼峰处理-->
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--<table schema="stock" tableName="shop_customer_address" domainObjectName="ShopCustomerAddress">-->
+            <!--&lt;!&ndash;属性驼峰处理&ndash;&gt;-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+
+        <!--<table schema="stock" tableName="shop_sell_rule" domainObjectName="ShopSellRule">-->
+            <!--&lt;!&ndash;属性驼峰处理&ndash;&gt;-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+
+        <!--<table schema="stock" tableName="shop_goods_extend" domainObjectName="ShopGoodsExtend">-->
+            <!--&lt;!&ndash;属性驼峰处理&ndash;&gt;-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table schema="stock" tableName="shop_img" domainObjectName="ShopImg">-->
+            <!--&lt;!&ndash;属性驼峰处理&ndash;&gt;-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table schema="stock" tableName="shop_goods_inventory_change_log" domainObjectName="ShopGoodsInventoryChangeLog">-->
+            <!--&lt;!&ndash;属性驼峰处理&ndash;&gt;-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table schema="stock" tableName="shop_cons_config" domainObjectName="ShopConsConfig">-->
+            <!--&lt;!&ndash;属性驼峰处理&ndash;&gt;-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+        <!--<table schema="stock" tableName="shop_customer_account_log" domainObjectName="ShopCustomerAccountLog">-->
+        <!--&lt;!&ndash;属性驼峰处理&ndash;&gt;-->
+        <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品详情</title>
+    	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<script src="js/jquery-1.8.3.js"></script>
+	    <script language="javascript">
+	        $(document).ready(function(){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize);})
+	        $(window).resize(function(e){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize)});
+	    </script>
+	    <script src="/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="js/toast.js" type="text/javascript" charset="utf-8"></script>
+	    <link rel="stylesheet" type="text/css" href="css/touch.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/toast.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/animate.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+	    <style type="text/css">
+	    	.qiang-f{
+	    		width: 100%;
+	    		height: 1rem;
+	    	}
+	    	.qiang-f .r{
+	    		width: 2.2rem;
+	    		height: 1rem;
+	    		float: right;
+	    		text-align: center;
+	    		line-height: 1rem;
+	    		font-size: 0.32rem;
+				color: #FFFFFF;
+	    	}
+	    	.qiang-f.noKuCun{
+	    		opacity: 0.35;
+	    		text-align: center;
+	    		line-height: 1rem;
+				background: #FE9901;
+				font-size: 0.32rem;
+				color: #FFFFFF;
+	    		
+	    	}
+	    	.qiang-f .r a{text-decoration: none;color: #fff;}
+	    	.qiang-f .r.r1{background: #FE9901;}
+	    	.qiang-f .r.r2{background: #F05C0B;}
+	    	.qiang-f .p-1{
+	    		font-size: 0.3rem;
+				color: #333333;height: 1rem;line-height: 1rem;
+				padding-left: 0.4rem;
+	    	}
+	    	.detail-top-div{
+	    		width: 100%;
+	    		height: 7.5rem;
+	    		background: darkcyan;
+	    	}
+	    	.swiper-pagination-bullet{background: #fff;opacity: 0.4;}
+	    	.swiper-pagination-bullet-active{opacity: 1;}
+	    	.det-ti{
+
+	    		height: 1.2rem;
+	    		background: #fff;
+	    		padding: 0.4rem;
+	    	}
+	    	.det-ti .p-1{font-size: 0.4rem;font-weight: 800;height: 0.56rem;line-height: 0.56rem;color: #333333;}
+	    	.det-ti .p-2{line-height: 0.44rem;height: 0.44rem;margin-top: 0.2rem;}
+	    	.det-ti .p-2 span.left{font-size: 16px;color: #FE9901;float: left;}
+	    	.det-ti .p-2 span.right{font-size: 14px;color: #999999;float: right;}
+			.shop-intro{
+				padding: 0.4rem;
+				background: #fff;
+				margin-top: 0.2rem;
+			}
+			.shop-intro .tit{
+				font-size: 0.36rem;
+				color: #333333;
+			}
+			.shop-intro p{
+				font-size: 0.28rem;
+				color: #595959;
+				line-height: 0.46rem;
+				margin-top: 0.3rem;
+			}
+			.shop-intro p img{
+				width: 100%!important;
+				margin:0 auto;
+
+			}
+			.detail-top-div .swiper-slide img{
+				width: 100%;
+				height: 100%;
+			}
+	    </style>
+	</head>
+	<body>
+		<!--header-->
+		<div class="zzg-header" style="position: fixed;z-index: 80;">
+			@if(isNotEmpty(whichFrom) && whichFrom=="cart"){
+			<div class="back" onclick="window.location.href='/myShopCart'">
+			@}else{
+			<div class="back" onclick="window.location.href='/'">
+			@}
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<!--<div class="text">老虎商城</div>
+			<div class="tag">新增</div>-->
+    	</div>
+        <!---->
+		<div class="flex-outer">			
+			<div class="scroll-content">
+					<div class="swiper-container detail-top-div">
+					    <div class="swiper-wrapper">
+							@for(shopImg in imgList){
+							<div class="swiper-slide">
+								<img src="${shopImg.imgPath}"/>
+							</div>
+							@}
+					    </div>
+					    <!-- 如果需要分页器 -->
+					    <div class="swiper-pagination"></div>
+					    
+					    <!-- 如果需要导航按钮 -->
+					    <!--
+					    	<div class="swiper-button-prev"></div>
+					        <div class="swiper-button-next"></div>					    
+					    -->					  
+					</div>
+					<!---->
+					<div class="det-ti px-border-bttom">
+						<p class="p-1">${thisGoods.name}</p>
+						<p class="p-2">
+							<span class="left">${thisGoods.sellPrice} 消费金</span>
+                            @if(thisGoods.firstPrice != null && thisGoods.firstPrice>0){
+							<span class="right">运费：${thisGoods.firstPrice}消费金</span>
+                            @}else{
+                            <span class="right">运费：包邮</span>
+                            @}
+						</p>
+					</div>
+					<div class="shop-intro">
+						<div class="tit">商品简介</div>
+						<p class="p-3">${goodsExtend.goodsDesc}</p>
+					</div>
+			</div>
+            @if(thisGoods.avaliableQuantity != null && thisGoods.avaliableQuantity>0 && thisGoods.launchStatus==1){
+            <div class="qiang-f px-border-top">
+				<div class="r r1"><a href="javascript:;" onclick="rushBuy(${thisGoods.id})">马上抢</a></div>
+				<div class="r r2" id="add-che" goodsId="${thisGoods.id}">加入购物车</div>
+				<p class="p-1">仅剩${thisGoods.avaliableQuantity}件</p>
+			</div>
+			@}else if(thisGoods.launchStatus!=1){
+			<div class="qiang-f px-border-top noKuCun">
+				已下架
+			</div>
+            @}else{
+			<div class="qiang-f px-border-top noKuCun">
+				暂无库存
+			</div>
+            @}
+				
+		</div>
+		<script type="text/javascript">
+            var myLock = false;
+			$(function(){
+				var mySwiper = new Swiper ('.swiper-container', {
+				    //direction: 'vertical', // 垂直切换选项
+				    loop: true, // 循环模式选项
+				    
+				    // 如果需要分页器
+				    pagination: {
+				      el: '.swiper-pagination',
+				    },
+				    
+				    // 如果需要前进后退按钮
+				    navigation: {
+				      nextEl: '.swiper-button-next',
+				      prevEl: '.swiper-button-prev',
+				    },
+				    
+				  })   
+				
+				
+				
+				$("#add-che").on("click",function(){
+                    if(myLock)return;
+                    myLock = true;
+                    var goodsId=$(this).attr("goodsId");
+                    $.post("/addCart",{goodsId:goodsId},function (data) {
+                        if(data.code == 'OK') {
+                            $('body').toast({
+                                content:'添加成功',
+                                duration:2000
+                            });
+                            myLock = false;
+                        } else {
+                            myToast("库存不足！");
+                        }
+                    },"json").error(function(){
+                        alert("系统异常！");
+                        myLock = false;
+                    });
+				})
+			})
+
+			function rushBuy(id) {
+                if(myLock)return;
+                myLock = true;
+                var url = "/checkQuantity";
+                var param = {id:id};
+                param = param || {};
+                $.ajax({
+                    url : url,
+                    data : param,
+                    type : 'POST',
+                    dataType : 'json',
+                    success : function(data) {
+                        if(data.code == 'OK') {
+                            window.location.href="/rushBuy?id="+id;
+                        } else {
+                            myToast("当前商品库存不足！");
+                        }
+                    },
+                    error : function(data) {
+                        myToast("系统异常！");
+                    }
+                });
+            }
+
+            function myToast(msg){
+                $('body').toast({
+                    content:msg,
+                    duration:3000,
+                });
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+			}
+				       
+
+		</script>
+	</body>
+</html>

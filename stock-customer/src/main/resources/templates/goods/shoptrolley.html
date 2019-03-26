@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车</title>
+    	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<script src="js/jquery-1.8.3.js"></script>
+		<script src="js/toast.js" type="text/javascript" charset="utf-8"></script>
+	    <script language="javascript">
+	        $(document).ready(function(){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize);})
+	        $(window).resize(function(e){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize)});
+	    </script>
+	    <link rel="stylesheet" type="text/css" href="css/touch.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/shoptrolley.css"/>
+		<link rel="stylesheet" type="text/css" href="css/toast.css"/>
+		<link rel="stylesheet" type="text/css" href="css/animate.css"/>
+	    <style type="text/css">
+	    
+	    </style>
+	</head>
+	<body>
+		<div class="flex-outer shoptrolley-c">
+			<!--header-->
+	    	<div class="zzg-header px-border-bttom">
+				<div class="back" onclick="window.location.href='/'">
+					<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+						<polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+					</svg>
+				</div>
+				<div class="text">购物车</div>
+			<!--	<div class="tag">新增</div>-->
+	    	</div>
+	    	<div class="scroll-content"  id="J_serviceList">
+				@for(goods in goodsListYes){
+				<!---->
+				<div class="J_touch_service deleteOneCart" data-id="${goods.cartId}">
+					<div class="cont">
+						<div class="left-mode">
+							<div class="checked-div checked-div-single" cartId="${goods.cartId}" sellPrice="${goods.sellPrice}" goodsNum="${goods.count}"></div>
+						</div>
+						<div class="right-mode">
+							<div class="shop-info">
+								<div class="shop-bottom">
+									<div class="img-box thisDetail"  goodsId="${goods.id}"><img src="${goods.imgPath}"/></div>
+									<div class="p-box">
+										<p class="p-1">${goods.name}</p>
+										<p class="p-2"><span>${goods.sellPrice}</span>消费金</p>
+										<div class="p-3">
+											<div class="opt-num-div">
+												<span class="opt left jianCartNum" cartId="${goods.cartId}">-</span>
+												<span class="num-span">${goods.count}</span>
+												<span class="opt right addCartNum" cartId="${goods.cartId}" goodsId="${goods.id}">+</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				@}
+
+				@for(goods in goodsListNo){
+				<!---->
+				<div class="J_touch_service deleteOneCart" data-id="${goods.cartId}">
+					<div class="cont">
+						<div class="left-mode">
+							<div class="checked-div shixiao"></div>
+						</div>
+						<div class="right-mode"  style="opacity: 0.6;">
+							<div class="shop-info">
+								<div class="shop-bottom">
+									<div class="img-box thisDetail"  goodsId="${goods.id}"><img src="${goods.imgPath}"/></div>
+									<div class="p-box">
+										<p class="p-1">${goods.name}</p>
+										<p class="p-2"><span>${goods.sellPrice}</span>消费金</p>
+										<p class="p-3">
+											库存不足，请重新选择商品
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				@}
+
+
+	    	</div>
+	    	<div class="jiesuan">
+	    		
+	    		<div class="right" id="toJieSuan">结算（<em id="toBuyNum">0</em>）</div>
+	    		<div class="choice-all-div">
+	    			<div class="checked-div"></div>
+	    			<span>全选</span>
+	    		</div>
+	    		<p class="p-2">
+	    			合计：<span id="toBuyJiaZhi">0</span>消费金
+	    		</p>
+
+	    	</div>
+	    	 <!--footer-->
+	        <div class="zzg-footer px-border-top">
+	        	<ul class="f">
+	        		<li>
+	        			<a href="/">
+		        			<div class="img-1 index"></div>
+							<p class="p-1">首页</p>
+	        			</a>
+	        		</li>
+	        		<li class="active">
+	        			<a href="/myShopCart">
+		        			<div class="img-1 gowuche"></div>
+							<p class="p-1">购物车</p>
+							@if(cartNum>0){
+							<div class="num"><span>${cartNum}</span></div>
+							@}
+	        			</a>
+	        		</li>
+	        		<li>
+	        			<a href="/own/home">
+		        			<div class="img-1 my"></div>
+							<p class="p-1">我的</p>
+	        			</a>
+	        		</li>
+	        	</ul>
+	        </div>
+        
+		</div>
+		<script type="text/javascript" src="js/slideToDo.js"></script>
+		<script type="text/javascript">
+			 var myLock = false;
+             var shopperId="";
+             var dongTai1 = document.getElementById("toBuyJiaZhi");
+             var dongTai2 = document.getElementById("toBuyNum");
+		 	$(function(){
+		 		new SlideToDo({
+			        parent: '#J_serviceList', // 列表组件Id
+			        target: '.J_touch_service', // 列表单元类名
+			        action: function(rebind){
+			          // 删除事件 函数
+						//console.log();
+			          //rebind() // 如果action函数重新渲染列表组件，rebind函数能重新绑定元素
+                        if(myLock)return;
+                        myLock = true;
+                        var _self =  $(this)
+                        var cartId=$(this).siblings(".slideTarget").find(".deleteOneCart").attr("data-id");
+                        $.post("/deleteOneCart",{cartId:cartId},function (data) {
+                            /*window.location.reload();*/
+                            _self.parent().remove();
+                            canBuy();
+                            myLock = false;
+                        },"json").error(function(){
+                            alert("系统异常！");
+                            myLock = false;
+                        });
+			        }
+				});
+
+		    
+		      $(".checked-div-single").on("click",function(){
+		      	  $(this).toggleClass("active");
+		      	 vaildAllChecked()
+		      });
+		      
+		     
+		      $(".choice-all-div").on("click",function(){
+		      	$(this).find(".checked-div").toggleClass("active");
+		      	if($(this).find(".checked-div").hasClass("active")){
+		      		 $(".checked-div-single").addClass("active")
+		      	}else{
+		      		$(".checked-div-single").removeClass("active")
+		      	}
+                  canBuy();
+		      });
+		      
+		     
+		      function vaildAllChecked(){
+				var allCheckedFlag=true;
+			       $(".checked-div-single").each(function(index,ele,arr){
+
+						if($(ele).hasClass("active")){
+							allCheckedFlag = allCheckedFlag&&true;
+						}else{
+							allCheckedFlag = allCheckedFlag&&false;
+						}
+			       })
+				   	
+			       if(allCheckedFlag){
+			       	  $(".choice-all-div .checked-div").addClass("active")
+			       }else{
+			       	  $(".choice-all-div .checked-div").removeClass("active")
+			       }
+                  canBuy();
+		      };
+
+                function canBuy(){
+                    var toBuyMoney=0;
+                    var toBuyNum=0;
+                    shopperId="";
+                    $(".checked-div-single").each(function(index,ele,arr){
+                        if($(ele).hasClass("active")){
+                            var cartId=$(ele).attr("cartId");
+                            var sellPrice=parseFloat($(ele).attr("sellPrice"));
+                            var goodsNum=parseInt($(ele).parents(".J_touch_service").find(".num-span").html());
+                            toBuyMoney+=sellPrice*goodsNum.toFixed(2);
+                            toBuyNum+=goodsNum;
+                            shopperId+=(","+cartId);
+                        }
+                    })
+                    dongTai1.innerHTML = (toBuyMoney.toFixed(2));
+                    dongTai2.innerHTML = toBuyNum;
+                }
+
+
+                $(".addCartNum").on("click",function(){
+                    if(myLock)return;
+                    myLock = true;
+                    var $this = $(this);
+                    var cartId=$(this).attr("cartId");
+                    var goodsId=$(this).attr("goodsId");
+                    $.post("/addCartNum",{cartId:cartId,goodsId:goodsId},function (data) {
+                        if(data.code == 'OK') {
+                          //  window.location.reload();
+							var zhi= $this.siblings(".num-span").html();
+							var temp  = parseInt(zhi);
+							temp++;
+                            $this.siblings(".num-span").html(temp);
+                            canBuy();
+                            myLock = false;
+                        } else {
+                            $('body').toast({
+                                content:'库存不足！',
+                                duration:1000
+                            });
+                            myLock = false;
+                        }
+                    },"json").error(function(){
+                        alert("系统异常！");
+                        myLock = false;
+                    });
+                });
+
+                $(".jianCartNum").on("click",function(){
+                    if(myLock)return;
+                    myLock = true;
+                    var $this = $(this);
+                    var cartId=$(this).attr("cartId");
+                    $.post("/jianCartNum",{cartId:cartId},function (data) {
+                       /* window.location.reload();*/
+                        var zhi= $this.siblings(".num-span").html();
+                        var temp  = parseInt(zhi);
+                        if(temp==1){
+                            $this.parents(".slideTarget").parent().remove();
+						}else{
+                            temp--;
+                            $this.siblings(".num-span").html(temp);
+						}
+                        canBuy();
+                        myLock = false;
+                    },"json").error(function(){
+                        alert("系统异常！");
+                        myLock = false;
+                    });
+                });
+
+                $(".thisDetail").on("click",function(){
+                    if(myLock)return;
+                    myLock = true;
+                    var goodsId=$(this).attr("goodsId");
+                    window.location.href="/goodsDetail?whichFrom=cart&id="+goodsId;
+                });
+                $("#toJieSuan").on("click",function(){
+                    if(myLock)return;
+                    myLock = true;
+                    if(shopperId.length>1){
+                        window.location.href="/rushBuy?shopperId="+shopperId;
+					}else{
+                        myLock = false;
+                        return;
+					}
+                });
+		      
+		   
+		 	})
+		    
+		  </script>
+	</body>
+</html>

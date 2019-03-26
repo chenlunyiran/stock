@@ -1,0 +1,134 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopGoodsInfo/"}){ -->
+
+<form class="layui-form layui-form-pane" id="addForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">编号</label>
+				<div class="layui-input-inline">
+					<input type="text" name="sku" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">商品名称</label>
+				<div class="layui-input-inline">
+					<input type="text" name="name" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">供应商id</label>
+				<div class="layui-input-inline">
+					<input type="text" name="supplierId" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">类别id</label>
+				<div class="layui-input-inline">
+					<input type="text" name="categoryId" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">进价</label>
+				<div class="layui-input-inline">
+					<input type="text" name="purchasePrice" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">售价</label>
+				<div class="layui-input-inline">
+					<input type="text" name="sellPrice" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">库存量</label>
+				<div class="layui-input-inline">
+					<input type="text" name="totalQuantity" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">可用库存量</label>
+				<div class="layui-input-inline">
+					<input type="text" name="avaliableQuantity" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">冻结库存量</label>
+				<div class="layui-input-inline">
+					<input type="text" name="frozenQuantity" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">上架状态： 0 未上架 1已上架</label>
+				<div class="layui-input-inline">
+					<input type="text" name="launchStatus" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">有效性， 0有效 1无效</label>
+				<div class="layui-input-inline">
+					<input type="text" name="state" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">置顶与排序:0不置顶、1-5为置顶顺序</label>
+				<div class="layui-input-inline">
+					<input type="text" name="sort" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="createTime" class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">更新时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="updateTime" class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" name="remark" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <layui:submitButtons id="addButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['add'], function(){
+    var shopGoodsInfoAdd = layui.add
+    shopGoodsInfoAdd.init();
+});
+</script>

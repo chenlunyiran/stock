@@ -1,0 +1,149 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopCustomer/"}){ -->
+
+<div class="layui-form layui-form-pane" id="updateForm" xmlns:hh="http://www.w3.org/1999/xhtml">
+
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">基本信息</li>
+            <li>地址信息</li>
+        </ul>
+        <div class="layui-tab-content" style="height: 100px;">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 170px;">用户名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" readonly id="userName" name="userName"  value="${shopCustomer.userName}"   class="layui-input" >
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 170px;">姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" readonly id="name" name="name"  value="${shopCustomer.name}"   class="layui-input" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 170px;">手机号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" readonly id="phone" name="phone"  value="${shopCustomer.phone}"   class="layui-input" >
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 170px;">身份证号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" readonly id="idCard" name="idCard"  value="${shopCustomer.idCard}"   class="layui-input" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 170px;">注册来源</label>
+                            <div class="layui-input-inline">
+                                <input type="text" readonly id="registFrom" name="registFrom" value="${shopCustomer.registFromText}"   class="layui-input"  />
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 170px;">源用户名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" readonly id="originalUserName" name="originalUserName" value="${shopCustomer.originalUserName}"   class="layui-input"  />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 170px;">开户时间</label>
+                            <div class="layui-input-inline">
+                                <input type="text" readonly id="createTime" name="createTime"  value="${shopCustomer.createTime,'yyyy-MM-dd HH:mm:ss'}"  class="layui-input" >
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 170px;">是否已设置交易密码</label>
+                            <div class="layui-input-inline">
+                                <!--# if(shopCustomer.tradePassword == null || shopCustomer.tradePassword == ""){  -->
+                                <input type="text" readonly value="否"  class="layui-input" >
+                                <!--# }else{  -->
+                                <input type="text" readonly value="是"  class="layui-input" >
+                                <!--# }  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <div class="layui-input-inline">
+                    <div class="layui-row">
+
+                        <!--# for(address in addressList){  -->
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" readonly id="contactName" name="contactName"  value="${address.name}"   class="layui-input" >
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" readonly id="contactPhone" name="contactPhone"  value="${address.phone}"   class="layui-input" >
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" readonly style="width: 300px;" id="contactAddress" name="contactAddress"  value="${address.area}${address.address}"   class="layui-input" >
+                                </div>
+                            </div>
+
+                            <!--# if(address.level == 1){  -->
+                            <button style="margin-left: 100px;" class="layui-btn">默认</button>
+                            <!--# }  -->
+                        </div>
+
+                        <!--# }  -->
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${shopCustomer.delFlag} />
+    <input type="hidden" name="id" value=${shopCustomer.id} />
+
+</div>
+
+<div style="margin-top: 200px; margin-left: 50%;"><layui:closeButton id="close"/></div>
+
+<!--#} -->
+<script>
+
+    layui.use(['edit'], function(){
+        var shopCustomerEdit = layui.edit
+        shopCustomerEdit.init();
+    });
+
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        $('.site-demo-active').on('click', function(){
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+
+</script>

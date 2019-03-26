@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/touch.css">
+    <title>我的地址2</title>
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script language="javascript">
+        $(document).ready(function(){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize);})
+        $(window).resize(function(e){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize)});
+    </script>
+    <style>
+        .myadress_cont{/*min-height: 100%;background: #f7f7f7;*/}
+        .hasAdress{padding-top: .01rem;}
+        .noadress img{width:3.02rem;height:2.74rem;margin:2rem auto 0;}
+        .noadress p{font-size: 16px;color: #CCC;margin-top: .6rem;}
+        .hasAdress_list{width:6.5rem;padding:.3rem;margin:.2rem auto 0;background:#fff url("/img/adress/border.png") center bottom no-repeat;background-size:7.1rem .04rem;}
+        .hasAdress_list p{font-size: .28rem;color: #333;margin-top: .12rem;line-height:.4rem;}
+        .hasAdress_list span{font-size: .32rem;line-height:.44rem;color: #333;margin-right: .2rem;}
+        .hasAdress_list em{width:.88rem;height:.34rem;line-height:.34rem;font-size:.24rem;color:#fff;background: #999;margin-top:.05rem;border-radius: .18rem;-webkit-border-radius: .18rem;}
+        .adress_info p{width:6.12rem;word-wrap:break-word;}
+        .adress_info a{width:.28rem;height:.28rem;margin-top:.2rem;background: url("/img/adress/edit.png") no-repeat;background-size:.28rem .28rem;}
+    </style>
+	<script src="/js/toast.js" type="text/javascript" charset="utf-8"></script>
+	<link href="/css/toast.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/css/animate.css"/>
+</head>
+<body>
+    <div class="flex-outer myadress_cont">
+    	<!--header-->
+    	<div class="zzg-header px-border-bttom">
+			@if(isNotEmpty(whitchFrom) && whitchFrom == "choose" ){
+			<div class="back"  onclick="window.location.href='/rushBuy?id=${goodsId!}&shopperId=${shopperId!}&addressId=${addressId!}'">
+			@}else{
+			<div class="back"  onclick="window.location.href='/own/home'">
+			@}
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">我的地址</div>
+			<a class="tag" id="addAddress" addressSize="${addresses.~size}" href="javascript:;">新增</a>
+    	</div>
+    	<div class="scroll-content">
+
+			@if(addresses.~size==0){
+				<!-- 暂无收货地址 -->
+				<div class="noadress">
+					<img class="db" src="/img/adress/noadress.png" alt="">
+					<p class="tc">您还未添加地址哦！</p>
+				</div>
+			@}else{
+				<!-- 有收货地址  -->
+				<div class="hasAdress">
+					@for(address in addresses){
+						@if(isNotEmpty(whitchFrom) && whitchFrom == "choose" ){
+							<div class="hasAdress_list toChoose" addResId="${address.id}">
+						@}else{
+							<div class="hasAdress_list">
+						@}
+						<div class="clearfix">
+							<span class="db fl">${address.name}</span>
+							<span class="db fl" style="color:#333">${address.phone}</span>
+							${address.level==1?'<em class="db fl tc">默认</em>':''}
+						</div>
+						<div class="adress_info clearfix">
+							<p class="fl">${address.area} ${address.address}</p>
+							<a class="db fr fixedAddress" data-id="${address.id}" ></a>
+						</div>
+						<p>${address.postcode}</p>
+					</div>
+					@}
+				</div>
+			@}
+        </div>
+    </div>
+	<script>
+        var whitchFrom="${whitchFrom!}";
+		$(function(){
+			$(".fixedAddress").on("click",function(e){
+				e.stopPropagation();
+				var $id = $(this).attr("data-id");
+                if(whitchFrom=="choose"){
+                    var $href="/own/addressManager/modifyAddressView?whitchFrom=choose&goodsId=${goodsId!}&shopperId=${shopperId!}&addressId=${addressId!}&id="+$id;
+                }else{
+                    var $href="/own/addressManager/modifyAddressView?id="+$id;
+				}
+				window.location.href = $href;
+
+			});
+
+
+			$(".toChoose").on("click",function(){
+				var addResId=$(this).attr("addResId");
+				window.location.href="/rushBuy?id=${goodsId!}&shopperId=${shopperId!}&addressId="+addResId;
+			});
+
+			$("#addAddress").on("click",function(){
+
+				if($(this).attr('addressSize')>4){
+					$('body').toast({
+						content:'最多添加5个地址',
+						duration:1000
+					});
+				}else{
+				    if(whitchFrom=="choose"){
+                        window.location.href="/own/addressManager/addAddressView?whitchFrom=choose&goodsId=${goodsId!}&shopperId=${shopperId!}&addressId=${addressId!}"
+					}else{
+                        window.location.href="/own/addressManager/addAddressView"
+					}
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>

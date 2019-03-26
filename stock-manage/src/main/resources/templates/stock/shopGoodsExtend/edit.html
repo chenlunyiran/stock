@@ -1,0 +1,46 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopGoodsExtend/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">商品id</label>
+				<div class="layui-input-inline">
+					<input type="text" id="goodsId" name="goodsId"  value="${shopGoodsExtend.goodsId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">详细信息</label>
+				<div class="layui-input-inline">
+					<input type="text" id="desc" name="desc"  value="${shopGoodsExtend.desc}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createTime" name="createTime"  value="${shopGoodsExtend.createTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">更新时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="updateTime" name="updateTime"  value="${shopGoodsExtend.updateTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="id" value=${shopGoodsExtend.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var shopGoodsExtendEdit = layui.edit
+    shopGoodsExtendEdit.init();
+});
+</script>

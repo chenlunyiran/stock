@@ -1,0 +1,32 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopSupplier/"}){ -->
+
+<form class="layui-form layui-form-pane" id="addForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">供应商名称</label>
+				<div class="layui-input-inline">
+					<input lay-verify="required" type="text" name="name" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" name="remark" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+        </div>
+    </div>
+    <layui:submitButtons id="addButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['add'], function(){
+    var shopSupplierAdd = layui.add
+    shopSupplierAdd.init();
+});
+</script>

@@ -1,0 +1,11 @@
+.paymentPage{/*min-height:100%;*/box-sizing:border-box;background:white;padding-top:1.6rem;}
+.paymentPage img{width:1.76rem;}
+.payMessage{display: flex;justify-content: center;margin-top:.36rem;margin-bottom: .44rem}
+.payMessage span:first-child{font-size:.36rem;color:#333;}
+.payMessage span:last-child{font-size:.4rem; color: #FF9901;}
+.payTips{font-size: .28rem;color: #4A4759;}
+
+
+
+
+

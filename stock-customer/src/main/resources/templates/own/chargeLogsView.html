@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/touch.css">
+    <title>消费兑换记录</title>
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script src="/js/common/_LZLH.js"></script>
+	<script src="/js/toast.js" type="text/javascript" charset="utf-8"></script>
+	<link href="/css/toast.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/css/animate.css"/>
+    <script language="javascript">
+        $(document).ready(function(){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize);})
+        $(window).resize(function(e){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize)});
+    </script>
+    <style>
+        body{height: 100%;}
+        .xfjls{width:7.5rem;/*min-height: 100%;*/margin:0 auto;background: #f7f7f7;padding-top:.2rem;}
+        .use_xfj{width:6.7rem;height:1.2rem;line-height: 1.2rem;background: #fff;padding:0 .4rem;margin:0 auto;}
+        .xfjls_list{margin-top: .2rem;padding:0 .2rem;background: #fff;}
+		.xfjls_list .div1{height: 0.8rem;line-height: 0.8rem;}
+		.xfjls_list .div1 .fl{height: 0.8rem;line-height: 0.8rem;font-size: 0.28rem;font-weight: 800;color: #333;}
+		.xfjls_list .div1 .fr{font-size: 0.28rem;color: #999;height: 0.8rem;
+			display: block;
+    /* width: 0.14rem;
+    height: 0.24rem; */
+    background: url(/img/order/more.png) no-repeat right center;
+    background-size:  0.14rem 0.24rem;
+			line-height: 0.8rem;padding-right: 0.36rem;
+		}
+		.xfjls_list .div2{height: 0.8rem;line-height: 0.8rem;}
+		.xfjls_list .div2 .fl{height: 0.8rem;line-height: 0.8rem;font-size: 0.32rem;color: #333;}
+		.xfjls_list .div2 .fr{font-size: 0.32rem;color: #999;height: 0.8rem;line-height: 0.8rem;}
+		.xfjls_list .div2 .fr .ora{font-size: 0.36rem;color: #FE9901;font-weight: 800;}
+    </style>
+	<script src="/js/common/moment.min.js"></script>
+	<script src="/js/common/util.js"></script>
+	<script type="text/javascript">
+		var data=${data};
+	</script>
+    
+</head>
+<body>
+	<div class="flex-outer">
+		<!--header-->
+    	<div class="zzg-header px-border-bttom">
+    		<div class="back"  onclick="window.location.href='/own/chargeView'">
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">消费兑换记录</div>
+		<!--	<div class="tag">新增</div>-->
+    	</div>
+    	<div class="scroll-content">
+			<!--  -->
+			<div class="xfjls_list" id="dataDiv"></div>
+			<p id="moreBtn" class="click-more">点击加载更多</p>
+    	</div>
+    </div>
+	<script src="/js/charge/chargeLogsView.js"></script>
+</body>
+</html>

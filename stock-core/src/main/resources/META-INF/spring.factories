@@ -1,0 +1,2 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.twotiger.shop.information.mqevent.spring.ons.autoconfig.ConsumerBeanAutoConfig,com.twotiger.shop.information.mqevent.spring.ons.autoconfig.ProducerBeanAutoConfig

@@ -1,0 +1,20 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/stock/shopGoodsExtend/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<div class="layui-btn-group">
+    <layui:accessButton function="shopGoodsExtend.add"  action="add">增加</layui:accessButton>
+    <layui:accessButton function="shopGoodsExtend.edit"  action="edit">编辑</layui:accessButton>
+    <layui:accessButton function="shopGoodsExtend.del"  action="del">删除</layui:accessButton>
+</div>
+
+<table id="shopGoodsExtendTable" lay-filter="shopGoodsExtendTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

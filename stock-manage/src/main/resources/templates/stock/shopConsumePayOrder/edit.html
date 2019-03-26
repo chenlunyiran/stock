@@ -1,0 +1,99 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopConsumePayOrder/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">客户ID</label>
+				<div class="layui-input-inline">
+					<input type="text" id="customerId" name="customerId"  value="${shopConsumePayOrder.customerId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">支付订单号</label>
+				<div class="layui-input-inline">
+					<input type="text" id="payOrderId" name="payOrderId"  value="${shopConsumePayOrder.payOrderId}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">兑换ID</label>
+				<div class="layui-input-inline">
+					<input type="text" id="exchangeId" name="exchangeId"  value="${shopConsumePayOrder.exchangeId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">支付金额</label>
+				<div class="layui-input-inline">
+					<input type="text" id="amount" name="amount"  value="${shopConsumePayOrder.amount}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">支付状态</label>
+				<div class="layui-input-inline">
+					<input type="text" id="status" name="status"  value="${shopConsumePayOrder.status}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">支付时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="payTime" name="payTime"  value="${shopConsumePayOrder.payTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">支付结果描述</label>
+				<div class="layui-input-inline">
+					<input type="text" id="retMsg" name="retMsg"  value="${shopConsumePayOrder.retMsg}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createTime" name="createTime"  value="${shopConsumePayOrder.createTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">更新时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="updateTime" name="updateTime"  value="${shopConsumePayOrder.updateTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" id="remark" name="remark"  value="${shopConsumePayOrder.remark}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${shopConsumePayOrder.delFlag} />
+    <input type="hidden" name="id" value=${shopConsumePayOrder.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var shopConsumePayOrderEdit = layui.edit
+    shopConsumePayOrderEdit.init();
+});
+</script>

@@ -1,0 +1,46 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopGoodsInfo/"}){ -->
+<style>
+	.layui-form-item .layui-input-inline{width:1000px;margin-left:10px;}
+	.layui-form-item .layui-input-inline button{margin-top:10px;}
+	.layui-form-item p{margin-left:15px;height:50px;line-height:50px;}
+</style>
+<form class="layui-form layui-form-pane" id="updateStickForm">
+   
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-main">
+				<div class="layui-input-inline">
+					<button type="text" value="1" class="layui-btn layui-btn-radius">第1位</button>
+					<button type="text" value="2" class="layui-btn layui-btn-radius">第2位</button>
+					<button type="text" value="3" class="layui-btn layui-btn-radius">第3位</button>
+					<br/>
+					<button type="text" value="4" class="layui-btn layui-btn-radius">第4位</button>
+					<button type="text" value="5" class="layui-btn layui-btn-radius">第5位</button>
+					<button type="text" value="100" class="layui-btn layui-btn-radius">不置顶</button>
+				</div>
+            </div>
+        </div>
+    </div>
+   
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${shopGoodsInfo.delFlag} />
+    <input type="hidden" name="id" value=${shopGoodsInfo.id} />
+	<input type="hidden" id="sort" name="sort" value="" />
+	<input type="hidden" name="launchStatus" id = "launchStatus" value=${shopGoodsInfo.launchStatus} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+    $(".layui-btn-radius").click(function() {
+        var sort = $(this).attr("value"); // $(this)表示获取当前被点击元素的name值
+        $("#sort").val(sort);
+        $(".layui-btn-radius").css({'background-color':'#009688'});
+        $(this).css({'background-color':'red'});
+        return false;
+    });
+
+layui.use(['stick'], function(){
+    var shopGoodsInfoStick = layui.stick
+    shopGoodsInfoStick.init();
+});
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>支付成功</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="format-detection" content="email=no" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/touch.css">
+        <script src="js/jquery-1.8.3.js"></script>
+        <script src="js/rem750.js"></script>
+        <link rel="stylesheet" href="css/payment.css">
+</head>
+<body>
+	<div class="flex-outer">
+		<!--header-->
+    	<div class="zzg-header px-border-bttom">
+    		<div class="back" onclick="window.location.href='/own/orderList'">
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">支付成功</div>
+			<!--<div class="tag">完成</div>-->
+    	</div>
+    <div class="scroll-content paymentPage tc pb15">
+        <img src="img/exchange/sucess.png" />
+        <p class="payMessage">
+            <span>支付成功：</span>
+            <span>${totalPrice} 消费金</span>
+        </p>
+        <p class="payTips">商品将于3天内完成发货</p>
+         <!-- 按钮 -->
+         <div class=" fixBt">
+                <a class="db orayButton tc" href="/own/orderList">完成</a>
+            </div>
+    </div>
+    </div>
+</body>
+</html>

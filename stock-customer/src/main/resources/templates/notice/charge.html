@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>兑换结果</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="format-detection" content="email=no" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/css/touch.css">
+        <script src="/js/jquery-1.8.3.js"></script>
+        <script src="/js/rem750.js"></script>
+        <link rel="stylesheet" href="/css/exchange.css">
+</head>
+<body>
+	<div class="flex-outer">
+		
+	
+	<!--header-->
+    	<div class="zzg-header px-border-bttom">
+    		<div class="back"  onclick="window.location.href='/own/chargeView'">
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">${result=='true'?'兑换成功':'兑换异常'}</div>
+			<!--<a class="tag" href="addAdress.html">新增</a>-->
+    	</div>
+        @if(result=='true'){
+            <div class="scroll-content exchange tc mb15">
+                <img src="/img/exchange/sucess.png" />
+                <p>兑换成功</p>
+                <!-- 按钮 -->
+                <div class=" fixBt">
+                    <a class="db orayButton tc" href="/">进入商城</a>
+                </div>
+
+            </div>
+        @}else{
+            <div class="scroll-content exchange tc mb15">
+                <img src="/img/exchange/fail.png" />
+                <p>兑换异常</p>
+                <!-- 按钮 -->
+                <div class=" fixBt">
+                    <a class="db orayButton tc" href="/own/chargeView">再试一次</a>
+                </div>
+
+            </div>
+        @}
+
+    </div>
+</body>
+</html>

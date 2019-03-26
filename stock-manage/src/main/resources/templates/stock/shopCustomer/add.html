@@ -1,0 +1,160 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopCustomer/"}){ -->
+
+<form class="layui-form layui-form-pane" id="addForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">原债权用户id</label>
+				<div class="layui-input-inline">
+					<input type="text" name="originalCustomerId" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">用户名</label>
+				<div class="layui-input-inline">
+					<input type="text" name="userName" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">姓名</label>
+				<div class="layui-input-inline">
+					<input type="text" name="name" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">手机号</label>
+				<div class="layui-input-inline">
+					<input type="text" name="phone" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">身份证号</label>
+				<div class="layui-input-inline">
+					<input type="text" name="idCard" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">密码</label>
+				<div class="layui-input-inline">
+					<input type="text" name="password" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">年龄</label>
+				<div class="layui-input-inline">
+					<input type="text" name="age" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">性别</label>
+				<div class="layui-input-inline">
+					<input type="text" name="sex" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">出生日</label>
+				<div class="layui-input-inline">
+					<input type="text" name="birthday" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">地址</label>
+				<div class="layui-input-inline">
+					<input type="text" name="address" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">状态</label>
+				<div class="layui-input-inline">
+					<input type="text" name="status" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="createTime" class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">更新时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="updateTime" class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">注册来源</label>
+				<div class="layui-input-inline">
+					<input type="text" name="registFrom" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">注册时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="registTime" class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">注册IP</label>
+				<div class="layui-input-inline">
+					<input type="text" name="registIp" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">注册设备</label>
+				<div class="layui-input-inline">
+					<input type="text" name="registDevice" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" name="remark" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <layui:submitButtons id="addButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['add'], function(){
+    var shopCustomerAdd = layui.add
+    shopCustomerAdd.init();
+});
+</script>

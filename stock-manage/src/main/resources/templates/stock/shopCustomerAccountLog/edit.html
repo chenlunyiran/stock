@@ -1,0 +1,99 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopCustomerAccountLog/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">客户ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="customerId" name="customerId"  value="${shopCustomerAccountLog.customerId}"   class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">类型</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="type" name="type"  value="${shopCustomerAccountLog.type}"   class="layui-input" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">操作金额</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="amount" name="amount"  value="${shopCustomerAccountLog.amount}"   class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">总金额</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="total" name="total"  value="${shopCustomerAccountLog.total}"   class="layui-input" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">冻结金额</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="frozen" name="frozen"  value="${shopCustomerAccountLog.frozen}"   class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">可用余额</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="avaliable" name="avaliable"  value="${shopCustomerAccountLog.avaliable}"   class="layui-input" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">关联订单号</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="thirdOrderId" name="thirdOrderId"  value="${shopCustomerAccountLog.thirdOrderId}"   class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">创建时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="createTime" name="createTime"  value="${shopCustomerAccountLog.createTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">更新时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="updateTime" name="updateTime"  value="${shopCustomerAccountLog.updateTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="remark" name="remark"  value="${shopCustomerAccountLog.remark}"   class="layui-input" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="delFlag" value=${shopCustomerAccountLog.delFlag} />
+    <input type="hidden" name="id" value=${shopCustomerAccountLog.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+    layui.use(['edit'], function(){
+        var shopCustomerAccountLogEdit = layui.edit
+        shopCustomerAccountLogEdit.init();
+    });
+</script>

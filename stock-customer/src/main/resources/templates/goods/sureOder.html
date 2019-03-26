@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>确认订单</title>
+    	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<script src="js/jquery-1.8.3.js"></script>
+	    <script language="javascript">
+	        $(document).ready(function(){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize);})
+	        $(window).resize(function(e){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize)});
+	    </script>
+		<script src="js/toast.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/toast.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/touch.css"/>
+        <link rel="stylesheet" type="text/css" href="css/animate.css"/>
+	    <style type="text/css">
+	    	.sureOrder-c{
+	    		
+	    	}
+	    	.zhifu-f{width: 100%;height: 1rem;}
+	    	.zhifu-f .zhifu{
+	    		float: right;
+	    		width: 3.2rem;
+	    		height: 1rem;
+				background: #ddd;
+	    		line-height: 1rem;
+	    		text-align: center;
+	    		font-size: 0.32rem;
+				color: #FFFFFF;
+	    	}
+			.zhifu-f .zhifu.active{background: #FE9901;}
+	    	.zhifu-f .ck{padding-left: 0.4rem;}
+	    	.zhifu-f .ck .p-1{height: 0.42rem;line-height: 0.42rem;font-size: 0.3rem;color: #151515;padding-top: 0.14rem;}
+	    	.zhifu-f .ck .p-2{height: 0.28rem;line-height:0.28rem;font-size: 0.2rem;color: #AAAAAA;}
+	    	.adress-mode{
+	    		padding:0 0.2rem;
+	    	}
+	    	.adress-mode .add-address{
+	    		margin: 0.2rem 0;
+	    		border-radius: 0.1rem;
+	    		background: #fff url(img/order/bottom.png) no-repeat left bottom;
+	    		background-size:100% 0.04rem ;
+	    		display: flex;
+	    		flex-direction: row;
+	    		justify-content: space-between;
+	    		align-items: center;
+	    		padding: 0.3rem 0.2rem 0.3rem 0.3rem;
+	    	}
+	    	.add-address .left{flex: 1;}
+	    	.add-address .left .p10{
+	    		font-size: 0.32rem;
+				color: #333333;
+				line-height: 0.44rem;
+				font-weight: 800;
+	    	}
+	    	.add-address .left .p10.per{
+	    		padding-top: 0.4rem;
+	    	}
+	    	.add-address .left .p-adress{
+	    		font-size: 0.28rem;
+				color: #333333;
+				line-height: 0.4rem;
+				padding-right: 0.3rem;
+				padding-top: 0.2rem;
+	    	}
+	    	.add-address .left .p-yb{
+	    		padding-top: 0.12rem;
+	    		line-height: 0.4rem;
+	    		font-size: 14px;
+				color: #333333;
+	    	}
+	    	.add-address .left .p10 .name{padding-right: 0.6rem;}
+	    	.add-address .right{
+	    		width: 0.14rem;height: 0.24rem;
+	    		background: url(img/order/more.png) no-repeat;
+	    		background-size:100% 100% ;
+	    	}
+	    	.shop-info{
+	    		padding: 0.3rem;
+	    		background: #fff;
+	    		border-radius:0.1rem;
+	    		margin: 0.2rem 0;
+	    	}
+	    	.shop-info .shop-top{
+	    		font-size: 0.32rem;
+				color: #333333;
+				margin-bottom: 0.3rem;
+	    	}
+	    	.shop-info .shop-bottom .img-box{
+	    		background: #D8D8D8;
+				border-radius: 0.12rem;
+				width: 1.6rem;
+				height: 1.6rem;
+				float: left;
+				overflow: hidden;
+	    	}
+	    	.shop-info .shop-bottom .img-box img{
+	    		width: 100%;
+	    		height: 100%;
+	    	}
+	    	.shop-info .shop-bottom .p-box{
+	    		padding-left:1.8rem;
+	    	}
+	    	.shop-info .shop-bottom .p-box .p-1{
+	    		font-size: 0.32rem;
+				color: #333333;
+				line-height: 0.44rem;
+				height: 0.44rem;
+	    	}
+	    	.shop-info .shop-bottom .p-box .p-2{
+	    		padding-top: 0.08rem;
+	    		height: 0.56rem;
+	    		line-height: 0.56rem;
+	    		font-size: 0.32rem;
+				color: #FE9901;
+		    	}
+	    	.shop-info .shop-bottom .p-box .p-2 span{
+	    		font-size: 0.4rem;
+	    	}
+	    	.shop-info .shop-bottom .p-box .p-3{
+	    		padding-top: 0.16rem;
+	    		font-size: 0.24rem;
+	    		height: 0.34rem;
+	    		line-height: 0.34rem;
+	    	}
+	    	.shop-info .shop-bottom .p-box .p-3 .left{
+	    		float: left;
+	    		color: #000;
+	    	}
+	    	.shop-info .shop-bottom .p-box .p-3 .right{
+	    		float: right;
+	    		color: #999;
+	    	}
+	    </style>
+	</head>
+	<body>
+	<!-- 通用弹窗 -->
+	<section style="display: none;" id="kuCunBuZu">
+		<div class="mark"></div>
+		<div class="tanCont">
+			<!--<p class="tanTitle tc">删除地址</p>-->
+			<div class="contFont">
+				<p class=" tc">部分商品库存不足，请重新选择商品</p>
+			</div>
+			<!-- 有2个按钮twoChildren 1个oneChild -->
+			<div class="btnOut oneChild">
+				@if(isNotEmpty(id)){
+				<a class="db tc" href="/goodsDetail?id=${id}">重新选择</a>
+				@}else{
+				<a class="db tc" href="/myShopCart">重新选择</a>
+				@}
+				<!-- <a class="db tc">删除</a> -->
+			</div>
+		</div>
+	</section>
+	<!-- 交易密码错误弹框 -->
+	<section style="display: none;" id="pwdError">
+		<div class="mark"></div>
+		<div class="tanCont">
+			<!--<p class="tanTitle tc">删除地址</p>-->
+			<div class="contFont">
+				<p class=" tc">支付密码错误，请重试</p>
+			</div>
+			<!-- 有2个按钮twoChildren 1个oneChild -->
+			<div class="btnOut twoChildren">
+				<a class="db tc" href="/own/modifyPassword?whitchFrom=wangji">忘记密码</a>
+				<a class="db tc" href="javascript:;" id="toRPwd">重试</a>
+			</div>
+		</div>
+	</section>
+	<!-- 没设置交易密码 -->
+	<section style="display: none;" id="toSheZhiPwd">
+		<div class="mark"></div>
+		<div class="tanCont">
+			<p class="tanTitle tc">设置交易密码</p>
+			<div class="contFont">
+				<p class=" tc">为了您的账户安全，请先设置交易密码。</p>
+			</div>
+			<!-- 有2个按钮twoChildren 1个oneChild -->
+			<div class="btnOut oneChild">
+				<a class="db tc" href="/own/modifyPassword?whitchFrom=choose&goodsId=${id!}&shopperId=${shopperId!}&addressId=${addressId!}">设置</a>
+			</div>
+		</div>
+	</section>
+		 <!-- 输入交易密码 -->
+	    <section id="yPassWord" style="display: none;">
+	        <div class="mark"></div>
+	        <div class="tanCont">
+	                <p class="tanTitle tc">请输入交易密码</p>
+	                <div class="contFont">
+	                    <p class=" tc">共支付</p>
+	                    <!-- 特殊字体 -->
+	                    <p class="tc oraBig">${totalPrice} 消费金</p>
+	                </div>
+	                  <!-- 密码 -->
+		                <div class="tranPassword">
+		                	   <input type="tel" maxlength="6" class="pwd-input" id="pwd-input">
+		                        <div class="fake-box">
+		                        	<input type="password" readonly=""><input type="password" readonly=""><input type="password" readonly=""><input type="password" readonly=""><input type="password" readonly=""><input type="password" readonly="">
+		                       </div> 
+		                </div>
+	        </div>
+	    </section>
+		
+		<div class="flex-outer sureOrder-c">
+			<!--header-->    	
+			<div class="zzg-header">
+				@if(isNotEmpty(id)){
+				<div class="back"  onclick="window.location.href='/goodsDetail?id=${id}'">
+				@}else{
+				<div class="back"  onclick="window.location.href='/myShopCart'">
+				@}
+
+					 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+	                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+	                 </svg>
+				</div>
+				<div class="text">确认订单</div>
+				<!--<div class="tag">新增</div>-->
+	    	</div>
+	    	<!---->
+	    	<div class="scroll-content adress-mode">
+				@if(address == null ){
+				<a href="/own/addressManager/addAddressView?whitchFrom=choose&goodsId=${id}&shopperId=${shopperId}&addressId=${addressId}">
+		    		<div class="add-address">		    			
+		    			<div class="left">
+		    				<p class="p10">添加地址</p>
+		    			</div>		    			
+		    			<div href="####" class="right"></div>
+		    		</div>
+	    	    </a>
+				@}else{
+	    	    <a href="/own/addressManager?whitchFrom=choose&goodsId=${id}&shopperId=${shopperId}&addressId=${addressId}">
+	    	    <!--<a href="javascript:;" id="toChooseAddress">-->
+		    		<div class="add-address">
+		    			<div class="left">
+		    				<p class="p10">收货信息</p>
+		    				<p class="p10 per"><span class="name">${address.name}</span><span class="tel">${address.phone}</span></p>
+		    				<p class="p-adress">${address.area} ${address.address}</p>
+		    				<p class="p-yb">${address.postcode}</p>
+		    			</div>
+		    			<div href="####" class="right"></div>
+		    		</div>
+	    		</a>
+				@}
+	    		<!--商品信息-->
+				@for(goods in goodsList){
+				@if(goodsLP.index==1){
+				<div class="shop-info">
+					<div class="shop-top">
+						商品信息
+					</div>
+					<div class="shop-bottom">
+						<div class="img-box"><img src="${goods.imgPath}"/></div>
+						<div class="p-box">
+							<p class="p-1">${goods.name}</p>
+							<p class="p-2"><span>${goods.sellPrice}</span>消费金</p>
+							<p class="p-3">
+								<span class="left">数量 x${goods.count}</span>
+								@if(goods.firstPrice != null && goods.firstPrice>0){
+								<span class="right">运费：${goods.firstPrice}消费金</span>
+								@}else{
+								<span class="right">运费：包邮</span>
+								@}
+							</p>
+						</div>
+					</div>
+				</div>
+				@}else{
+				<div class="shop-info">
+	    			<div class="shop-bottom">
+	    				<div class="img-box"><img src="${goods.imgPath}"/></div>
+	    				<div class="p-box">
+	    					<p class="p-1">${goods.name}</p>
+	    					<p class="p-2"><span>${goods.sellPrice}</span>消费金</p>
+	    					<p class="p-3">
+	    						<span class="left">数量 x${goods.count}</span>
+								@if(goods.firstPrice != null && goods.firstPrice>0){
+								<span class="right">运费：${goods.firstPrice}消费金</span>
+								@}else{
+								<span class="right">运费：包邮</span>
+								@}
+	    					</p>
+	    				</div>
+	    			</div>
+	    		</div>
+				@}
+				@}
+	    	</div>
+	    	<!---->
+	    	<!---->
+	    	<!---->	    	
+	    	<div class="zhifu-f">
+				@if(totalPrice > avaliable){
+					<div class="zhifu"><a href="/own/chargeView">余额不足，去兑换</a></div>
+				@}else if(totalPrice>0 && address!=null){
+					<div class="zhifu active" id="imzhi">立即支付</div>
+				@}else{
+	            	<div class="zhifu">立即支付</div>
+				@}
+	    		<div class="ck">
+	    			<p class="p-1">合计：${totalPrice}消费金</p>
+	    			<p class="p-2">剩余：${avaliable,numberFormat="##,###.##"}消费金</p>
+	    		</div>
+	    	</div>
+		</div>
+		<script type="text/javascript">
+            var myLock = false;
+            var myLockPay = false;
+			var kuCun="${kuCun}";
+			var orderId=-1;
+			var totalPrice="${totalPrice}";
+			$(function(){
+			    if(kuCun=="no"){
+                    $('body').toast({
+                        content:'所有商品库存不足',
+                        duration:3000
+                    });
+                    setTimeout(function () {
+                        window.location.href="/myShopCart";
+                    }, 2000);
+				}else if(kuCun=="buFen"){
+                    $('body').toast({
+                        content:'部分商品库存不足',
+                        duration:1000
+                    });
+				}
+
+				$("#toChooseAddress").on("click",function(){
+                    $.get("/own/addressManager?whitchFrom=choose&goodsId=${id}&shopperId=${shopperId}",{},function () {
+                        window.location.href="/own/addressManager?whitchFrom=choose&goodsId=${id}&shopperId=${shopperId}";
+                    });
+						
+				});
+
+			    $("#toRPwd").on("click",function(){
+                    myLockPay = false;
+                    clearInput();
+                    $("#pwdError").hide();
+                    $("#yPassWord").show();
+				});
+
+				$("#imzhi").on("click",function(){
+                    if(myLock)return;
+                    myLock = true;
+                    if("${havePwd}"!="yes"){
+                        $("#toSheZhiPwd").show();
+                        return;
+					}
+				    //调接口校验库存生成订单
+                    $.post("/parseOrder",{goodsId:"${id}",addressId:"${addressId}",shopperId:"${shopperId}",totalPrice:"${totalPrice}"},function (data) {
+                        if(data.code == 'OK') {
+                            //生成订单成功
+                            orderId=data.data;
+                            $("#yPassWord").show();
+                        } else if(data.code == 'CHANGE'){
+                            //金额变动
+                            myToast("商品价格已调整，请重新确认订单");
+                        } else {
+                            //生成订单失败，弹框，弹框中点击据kuCun="FromDetail";跳转回不同页面。
+                            $("#kuCunBuZu").show();
+                        }
+                    },"json").error(function(){
+                        $('body').toast({
+                            content:'系统异常！',
+                            duration:2000
+                        });
+                        myLock = false;
+                    });
+
+				});
+
+                function myToast(msg){
+                    $('body').toast({
+                        content:msg,
+                        duration:3000,
+                    });
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+                function myToastToMyOrder(msg){
+                    $('body').toast({
+                        content:msg,
+                        duration:2000
+                    });
+                    setTimeout(function () {
+                        window.location.href="/own/orderList";
+                    }, 1000);
+                }
+
+
+				$(".mark").on("click",function(){
+                    window.location.href="/own/orderList";
+					$("#yPassWord").hide();
+				})
+				var $input = $(".fake-box input");
+			//	$("#pwd-input").focus()
+						$("#pwd-input").on("input", function() {
+							var pwd = $(this).val().trim();
+							for (var i = 0, len = pwd.length; i < len; i++) {
+								$input.eq("" + i + "").val(pwd[i]);
+							}
+							$input.each(function() {
+								var index = $(this).index();
+								if (index >= len) {
+									$(this).val("");
+								}
+							});
+							if (len == 6) {
+                                if(myLockPay)return;
+                                myLockPay = true;
+                                $("#yPassWord").hide();
+								//执行其他操作
+                                clearInput();
+                                $.post("/orderToPay",{orderId:orderId,pwd:pwd},function (data) {
+                                    if(data.code == 'OK') {
+                                        window.location.href="/paySuccess?totalPrice="+totalPrice;
+                                    } else if(data.code == 'EX'){
+                                        if(data.msg == "交易密码错误！"){
+                                            $("#pwdError").show();
+										}else{
+                                            myToastToMyOrder(data.msg);
+										}
+                                    } else {
+                                        myToastToMyOrder('系统异常！');
+                                    }
+                                },"json").error(function(){
+                                    myToastToMyOrder('系统异常！');
+                                });
+							}
+						});
+
+						function clearInput(){
+						    $(".tranPassword").find("input").val("")
+						}
+
+			})
+
+
+		</script>
+	</body>
+</html>

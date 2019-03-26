@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/touch.css">
+    <title>新增地址</title>
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script src="/js/rem750.js"></script>
+
+   <link rel="stylesheet" type="text/css" href="/css/ydui.css"/>
+	<style>
+		input::-webkit-input-placeholder{font-size: .32rem;color: #CCC;}
+		.myadress_cont{min-height: 100%;/*background: #f7f7f7;*/}
+		.myadress_info{padding-left:.4rem;background: #fff;}
+		.myadress_info>div p{width:1.68rem;font-size: .32rem;height:.44rem;line-height:.44rem;color: #333;}
+		.myadress_info>div{position:relative;display: -webkit-box;display: -ms-flexbox;display: flex;padding:.38rem 0;align-items: center;}
+		.myadress_info>div input{width:5.4rem;height:.44rem;line-height: .44rem;font-size: .32rem;}
+		.setAdress{height:1.2rem;padding-left: .4rem;background: #fff;}
+		.setAdress p{width:50%;font-size: .32rem;padding-top:.38rem;height:.44rem;line-height:.44rem;color: #333;}
+		.setAdress a{background: url(/img/adress/close.png) center no-repeat;width:1.02rem;height:.82rem;background-size: 100% auto;margin: .18rem .4rem 0 0;}
+		.setAdress a.active{background: url(/img/adress/open.png) center no-repeat;background-size: 100% auto;}
+	</style>
+</head>
+<body>
+    <div class="flex-outer myadress_cont">
+		<form id="submit-form" action="/own/addressManager/modifyAddress" method="post">
+			<input name="type" type="hidden" value="insert">
+			<input name="whitchFrom" type="hidden" value="${whitchFrom!}">
+			<input name="goodsId" type="hidden" value="${goodsId!}">
+			<input name="shopperId" type="hidden" value="${shopperId!}">
+			<div class="zzg-header px-border-bttom">
+				@if(isNotEmpty(whitchFrom) && whitchFrom == "choose" && isNotEmpty(addressId)){
+				<div class="back"  onclick="window.location.href='/own/addressManager?whitchFrom=choose&goodsId=${goodsId!}&shopperId=${shopperId!}&addressId=${addressId!}'">
+				@}else if(isNotEmpty(whitchFrom) && whitchFrom == "choose"){
+				<div class="back"  onclick="window.location.href='/rushBuy?id=${goodsId!}&shopperId=${shopperId!}&addressId=${addressId!}'">
+				@}else{
+				<div class="back" onclick="window.location.href='/own/addressManager'">
+				@}
+					 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+							<polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+					 </svg>
+				</div>
+				<div class="text">新增地址</div>
+				<div class="tag" id="wancheng">完成</div>
+			</div>
+			<div class="scroll-content">
+				<div class="myadress_info">
+					<div class="clearfix bottom_bor">
+						<p>联系人</p>
+						<input type="text" id="name" name="name" placeholder="名字">
+					</div>
+					<div class="clearfix bottom_bor">
+						<p>手机号码</p>
+						<input type="tel" id="phone" maxlength="11" name="phone" placeholder="11位手机号码">
+					</div>
+					<div class="clearfix bottom_bor">
+						<p>选择地区</p>
+						  <input type="text" class="cell-input" readonly=""  id="J_Address" name="area" placeholder="地区信息">
+					</div>
+					<div class="clearfix bottom_bor">
+						<p>详细地址</p>
+						<input type="text" id="address" name="address" placeholder="街道门牌信息">
+					</div>
+					<div class="clearfix bottom_bor">
+						<p>邮政编码</p>
+						<input type="text" id="postcode" name="postcode" placeholder="邮政编码">
+					</div>
+					<input id="level" name="level" hidden="hidden" value="0">
+				</div>
+				<div class="clearfix bottom_bor setAdress">
+					<p class="fl">设为默认地址</p>
+					<a class="db fr" href="javascript:;"></a>
+				</div>
+			</div>
+		</form>
+    </div>
+    
+	  <div class="m-cityselect"> 
+	   <div class="cityselect-header"> 
+	    <p class="cityselect-title">所在地区</p> 
+	    <div class="cityselect-nav"> 
+	     <a href="javascript:;" class=""></a> 
+	     <a href="javascript:;" class=""></a> 
+	     <a href="javascript:;" class=""></a> 
+	    </div> 
+	   </div> 
+	   <ul class="cityselect-content cityselect-move-animate cityselect-next"> 
+	    <li class="cityselect-item"> 
+	     <div class="cityselect-item-box"></div> </li> 
+	    <li class="cityselect-item"> 
+	     <div class="cityselect-item-box"></div> </li> 
+	    <li class="cityselect-item"> 
+	     <div class="cityselect-item-box"></div> </li> 
+	   </ul>
+	  </div>
+    <script type="text/javascript" src="/js/ydui.citys.js"></script>
+	<script type="text/javascript" src="/js/ydui.js"></script>
+	<script type="text/javascript" src="/js/address/addressManager.js"></script>
+
+	<script src="/js/common/util.js"></script>
+	<script src="/js/toast.js" type="text/javascript" charset="utf-8"></script>
+	<link href="/css/toast.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/css/animate.css"/>
+    <script>
+    	$(function(){
+    		   $(".setAdress a").click(function(){
+		            $(this).toggleClass("active");
+				   if($(this).hasClass("active")){
+					   $("#level").val("1");
+				   }else {
+					   $("#level").val("0");
+				   }
+
+		        });
+    			var $target = $('#J_Address');
+    	})
+      		!function () {
+			var $target = $('#J_Address');
+
+			$target.citySelect();
+
+			$target.on('click', function (event) {
+				event.stopPropagation();
+				$target.citySelect('open');
+			});
+
+			$target.on('done.ydui.cityselect', function (ret) {
+				$(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+			});
+		}();
+    </script>
+	<script>
+		$(function(){
+			$("#wancheng").on("click",function(){
+				var message = "";
+				var $name = TT.tichukongge($("#name").val());
+				var $phone = TT.tichukongge($("#phone").val());
+				var $area = TT.tichukongge($("#J_Address").val());
+				var $address = TT.tichukongge($("#address").val());
+				var $postcode = TT.tichukongge($("#postcode").val());
+
+				var lengthBetween = TT.lengthBetween($name,1,10);
+				if(!lengthBetween && message==""){
+					message = "收货人姓名不合法";
+				}
+
+				var a = TT.Regex.phone[0].test($phone);
+				if(!a && message==""){
+					message = TT.Regex.phone[1];
+				}
+
+				var b = TT.isBlank($area);
+				if(b && message==""){
+					message = "区域不能为空";
+				}
+
+				var c = TT.isBlank($address);
+				if(c && message==""){
+					message = "详细地址不能为空";
+				}
+
+				var d = TT.maxLength($address,100);
+				if(d && message==""){
+					message = "详细地址太长";
+				}
+
+				var e = TT.Regex.postcode[0].test($postcode);
+				if(!e && message==""){
+					message = TT.Regex.postcode[1];
+				}
+
+				if(message==""){
+					$("#submit-form").submit();
+				}else{
+					$('body').toast({
+						content: message,
+						duration:1000
+					});
+				}
+			})
+		})
+	</script>
+</body>
+</html>

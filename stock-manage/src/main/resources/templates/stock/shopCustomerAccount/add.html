@@ -1,0 +1,76 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopCustomerAccount/"}){ -->
+
+<form class="layui-form layui-form-pane" id="addForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">商城客户信息的客户id</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="customerId" class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">总额=冻结+可用</label>
+				<div class="layui-input-inline">
+					<input type="text" name="total" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">冻结金额</label>
+				<div class="layui-input-inline">
+					<input type="text" name="frozen" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">可用金额</label>
+				<div class="layui-input-inline">
+					<input type="text" name="avaliable" class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">累计兑换额</label>
+				<div class="layui-input-inline">
+					<input type="text" name="totalExchange" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="createTime" class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">更新时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="updateTime" class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" name="remark" class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <layui:submitButtons id="addButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['add'], function(){
+    var shopCustomerAccountAdd = layui.add
+    shopCustomerAccountAdd.init();
+});
+</script>

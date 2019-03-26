@@ -1,0 +1,20 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/stock/shopConsumePayOrder/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<div class="layui-btn-group">
+    <layui:accessButton function="shop.shopConsumePayOrder.add"  action="add">增加</layui:accessButton>
+    <layui:accessButton function="shop.shopConsumePayOrder.edit"  action="edit">编辑</layui:accessButton>
+    <layui:accessButton function="shop.shopConsumePayOrder.del"  action="del">删除</layui:accessButton>
+</div>
+
+<table id="shopConsumePayOrderTable" lay-filter="shopConsumePayOrderTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

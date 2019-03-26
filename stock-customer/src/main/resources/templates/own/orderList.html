@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/touch.css">
+    <title>我的订单</title>
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script src="/js/toast.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/common/util.js"></script>
+    <script src="/js/common/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/toast.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/animate.css"/>
+    <script language="javascript">
+        $(document).ready(function(){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize);})
+        $(window).resize(function(e){var width=$(window).width();var fontSize;if(!(width<750)){fontSize="100px"}else{fontSize=width/750*100+"px"};$("html").css("font-size",fontSize)});
+    </script>
+    <style>
+        .myorder_cont{/*min-height: 100%;*/background: #F7F7F7;padding-top:.01rem;}
+        .myorder_list{width:6.5rem;margin:.2rem auto;background: #fff;padding:.22rem .3rem .3rem;}
+        .list_top{height:.58rem;}
+        .list_top p{font-size: .28rem;color: #999;line-height: .56rem;}
+        .list_top span{font-size: .28rem;color: #333;line-height:.56rem;}
+        .list_top a{width:1.44rem;height:.54rem;line-height:.54rem;font-size: .24rem;color: #FE9901;border:1px solid #FF9901;border-radius:.28rem;-webkit-border-radius:.28rem;}
+        .list_bottom{height:.94rem;line-height: .94rem;}
+        .list_bottom p{font-size: .24rem;color: #333;}
+        .list_bottom span{font-size: .24rem;color: #999;}
+        .list_center{margin-top: .4rem;padding-bottom:0.3rem;}
+        .list_center dl dt{width:1.6rem;height:1.6rem;overflow: hidden;background: #D8D8D8;margin-right:.2rem;border-radius:.12rem;-webkit-border-radius:.12rem;}
+        .list_center dl dd{width:4.7rem;}
+        .list_center dl dd p{font-size: .32rem;color: #333;line-height: .44rem;}
+        .list_center dl dd span{color: #FE9901;font-size: .32rem;line-height: .4rem;margin-top:.12rem; }
+        .list_center dl dd span strong{font-size: .4rem;}
+        .list_center dl dd p:last-child em{font-size: .24rem;line-height:.3rem;color: #000;margin-top: .24rem;}
+        .list_center dl dd p em.fr{color: #999;}
+        .list_center dl dt img{width: 100%;height: 100%;}
+    </style>
+    <script type="text/javascript">
+        var data=${data};
+    </script>
+</head>
+<body>
+	<div class="flex-outer">
+	<!--header-->
+    	<div class="zzg-header px-border-bttom">
+    		<div class="back"  onclick="window.location.href='/own/home'">
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">我的订单</div>
+		<!--	<div class="tag">新增</div>-->
+    	</div>
+        <div class="scroll-content myorder_cont">
+            <div id="dataDiv"></div>
+            <p id="moreBtn" class="click-more">点击加载更多</p>
+        </div>
+
+	</div>
+    <div class="go-top">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+    </div>
+	
+	  <!-- 通用弹窗 -->
+    <section style="display: none" id="wuliu-popup">
+        <div class="mark"></div>
+        <div class="tanCont">
+            <p class="tanTitle tc">物流信息</p>
+            <div class="contFont">
+                <p class="tl" id="logisticsCompany"></p>
+                <p class="tl" id="logisticsNum"></p>
+            </div>
+            <!-- 有2个按钮twoChildren 1个oneChild -->
+            <div class="btnOut oneChild">
+                <a class="db tc" id="ikonw">我知道了</a>
+                <!-- <a class="db tc">删除</a> -->
+            </div>
+        </div>
+    </section>
+    <!-- 交易密码错误弹框 -->
+    <section style="display: none;" id="pwdError">
+        <div class="mark"></div>
+        <div class="tanCont">
+            <!--<p class="tanTitle tc">删除地址</p>-->
+            <div class="contFont">
+                <p class=" tc">支付密码错误，请重试</p>
+            </div>
+            <!-- 有2个按钮twoChildren 1个oneChild -->
+            <div class="btnOut twoChildren">
+                <a class="db tc" href="/own/modifyPassword?whitchFrom=wangji">忘记密码</a>
+                <a class="db tc" href="javascript:;" id="toRPwd">重试</a>
+            </div>
+        </div>
+    </section>
+    <!-- 输入交易密码 -->
+    <section id="yPassWord" style="display: none;">
+        <div class="mark markPay"></div>
+        <div class="tanCont">
+            <p class="tanTitle tc">请输入交易密码</p>
+            <div class="contFont">
+                <p class=" tc">共支付</p>
+                <!-- 特殊字体 -->
+                <p class="tc oraBig"><em id="toPayMoney">0</em> 消费金</p>
+            </div>
+            <!-- 密码 -->
+            <div class="tranPassword">
+                <input type="tel" maxlength="6" class="pwd-input" id="pwd-input">
+                <div class="fake-box">
+                    <input type="password" readonly=""><input type="password" readonly=""><input type="password" readonly=""><input type="password" readonly=""><input type="password" readonly=""><input type="password" readonly="">
+                </div>
+            </div>
+        </div>
+    </section>
+	<script type="text/javascript">
+        var myLockPay = false;
+		$(function(){
+            $("#ikonw,.mark").on("click",function(){
+                $("#wuliu-popup").hide();
+                myLockPay = false;
+                $("#pwdError").hide();
+
+            });
+
+            $("#toRPwd").on("click",function(){
+                myLockPay = false;
+                $("#pwdError").hide();
+                $("#yPassWord").show();
+            });
+            function clearInput(){
+                $(".tranPassword").find("input").val("")
+            };
+            function myToastToMyOrder(msg){
+                $('body').toast({
+                    content:msg,
+                    duration:3000
+                });
+                myLockPay = false;
+            }
+            $(".markPay").on("click",function(){
+                $("#yPassWord").hide();
+            })
+            var $input = $(".fake-box input");
+            //	$("#pwd-input").focus()
+            $("#pwd-input").on("input", function() {
+                var pwd = $(this).val().trim();
+                for (var i = 0, len = pwd.length; i < len; i++) {
+                    $input.eq("" + i + "").val(pwd[i]);
+                }
+                $input.each(function() {
+                    var index = $(this).index();
+                    if (index >= len) {
+                        $(this).val("");
+                    }
+                });
+                if (len == 6) {
+                    if(myLockPay)return;
+                    myLockPay = true;
+                    $("#yPassWord").hide();
+                    //执行其他操作
+                    clearInput();
+                    $.post("/orderToPayOneByOne",{orderId:orderId,pwd:pwd},function (data) {
+                        if(data.code == 'OK') {
+                            window.location.href="/paySuccess?totalPrice="+totalPrice;
+                        } else if(data.code == 'EX'){
+                            if(data.msg == "交易密码错误！"){
+                                $("#pwdError").show();
+                            }else{
+                                myToastToMyOrder(data.msg);
+                            }
+                        } else {
+                            myToastToMyOrder('系统异常！');
+                        }
+                    },"json").error(function(){
+                        myToastToMyOrder('系统异常！');
+                    });
+                }
+            });
+
+		})
+	</script>
+    <script src="/js/order/orderlist.js"></script>
+</body>
+</html>

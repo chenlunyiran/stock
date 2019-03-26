@@ -1,0 +1,109 @@
+app:
+    name: stock-job
+logging:
+    level:
+        org:
+            springframework:
+                web:
+                    servlet:
+                        mvc:
+                            method:
+                                annotation: warn
+        root: info
+    pattern:
+        console: '%-4relative [%thread] %-5level %logger{256} %M %L - %msg%n'
+server:
+    port: 9001
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    cache:
+        type: redis
+    datasource:
+        name: dataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: test1@34
+        url: jdbc:mysql://rm-2ze6s3yp67789ex92xo.mysql.rds.aliyuncs.com/stock?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
+        username: root
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari:
+            auto-commit: true
+            connection-test-query: SELECT 2
+            connection-timeout: 30000
+            idle-timeout: 30000
+            max-lifetime: 1800000
+            maximum-pool-size: 16
+            minimum-idle: 5
+            pool-name: HikariCPPool
+    data:
+        jpa:
+          repositories:
+              enabled: true
+          database: MYSQL
+          database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+          generate-ddl: false
+          open-in-view: false
+          show-sql: false
+          properties:
+            hibernate:
+              ddl-auto: none
+              naming:
+                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+                physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    devtools:
+        restart:
+            exclude: static/**,templates/**
+    session:
+        store-type: redis
+    redis:
+        database: 3
+        timeout: 10000
+        host: 127.0.0.1
+        port: 6379
+        password: 123456
+        pool:
+          max-active: 25
+          max-wait: -1
+          max-idle: 10
+          min-idle: 0
+
+mybatis:
+    config-location: classpath:MyBatis.xml
+    check-config-location: true
+    mapper-locations: classpath*:com/twotiger/stock/core/mapper/*.xml
+    type-aliases-package: com.twotiger.stock.core.entity
+    type-handlers-package: com.twotiger.stock.core.typehandler
+    executor-type: REUSE
+mapper:
+    mappers:
+        - com.twotiger.stock.db.mybatis.NoExampleMapper
+    not-empty: false
+    identity: MYSQL
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+url:
+    twotiger:
+          base: http://localhost:8080
+          auth: http://192.168.70.26
+xxl:
+    job:
+        accessToken: ''
+        admin:
+            addresses: http://127.0.0.1:9000/xxl-job-admin
+        executor:
+            appname: xxl-job-executor-stock
+            ip: ''
+            logpath: /data/applogs/xxl-job/jobhandler
+            logretentiondays: -1
+            port: 9999
+
+aliyun:
+  ons:
+    producer: false
+    consumer: true
+    access-key: ''
+    secret-key: ''
+    topic: ''

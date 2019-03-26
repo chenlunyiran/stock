@@ -1,0 +1,21 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopConsumeGoodsOrder/"}){ -->
+
+<form class="layui-form layui-form-pane" id="remarkForm">
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="remark">${shopConsumeGoodsOrderVo.remark}</textarea>
+        </div>
+    </div>
+
+    <input type="hidden" name="id" value=${shopConsumeGoodsOrderVo.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['remark'], function(){
+    var remark = layui.remark
+    remark.init();
+});
+</script>

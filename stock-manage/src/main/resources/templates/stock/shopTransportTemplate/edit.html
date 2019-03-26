@@ -1,0 +1,131 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopTransportTemplate/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">模板名称</label>
+				<div class="layui-input-inline">
+					<input lay-verify="required" type="text" id="name" name="name"  value="${shopTransportTemplate.name}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">运送方式</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="transportStyle" name="transportStyle"  value="${shopTransportTemplate.transportStyle}"   class="layui-input" >
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">计件方式</label>
+                <div class="layui-input-inline">
+                    <input lay-verify="required" type="text" id="counterStyle" name="counterStyle"  value="${shopTransportTemplate.counterStyle}"   class="layui-input" >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">首件（个）</label>
+				<div class="layui-input-inline">
+					<input lay-verify="required|number" type="text" id="firstCount" name="firstCount"  value="${shopTransportTemplate.firstCount}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label style="width: 150px" class="layui-form-label">运费（消费金）</label>
+				<div class="layui-input-inline">
+					<input lay-verify="required|number" type="text" id="firstPrice" name="firstPrice"  value="${shopTransportTemplate.firstPrice}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">续件（个）</label>
+				<div class="layui-input-inline">
+					<input lay-verify="required|number" type="text" id="nextCount" name="nextCount"  value="${shopTransportTemplate.nextCount}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label style="width: 150px" class="layui-form-label">运费（消费金）</label>
+				<div class="layui-input-inline">
+					<input lay-verify="required|number" type="text" id="nextPrice" name="nextPrice"  value="${shopTransportTemplate.nextPrice}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-inline layui-form-mid layui-word-aux">（人民币与消费金的最低兑换比例为 1:${minRatio}）</div>
+            <div class="layui-inline layui-form-mid layui-word-aux"><span style="color:#1E92FB" id="minRatioSpan"></span></div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+                    <textarea style="width: 1000px; min-height: 200px;" type="text" name="remark" class="layui-textarea" >${shopTransportTemplate.remark}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${shopTransportTemplate.delFlag} />
+    <input type="hidden" name="id" value=${shopTransportTemplate.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var shopTransportTemplateEdit = layui.edit
+    shopTransportTemplateEdit.init();
+    var minRatio = parseInt('${minRatio}');
+
+    var fc = parseInt('${shopTransportTemplate.firstCount}');
+    var fp = parseInt('${shopTransportTemplate.firstPrice}');
+    var nc = parseInt('${shopTransportTemplate.nextCount}');
+    var nf = parseInt('${shopTransportTemplate.nextPrice}');
+    $("#minRatioSpan").text(fc+'件 '+fp+'消费金，每增加 '+nc+'件 ，加'+nf+'消费金');
+
+    $("#firstCount").change(function() {
+        changeEvent(minRatio);
+    });
+    $("#firstPrice").change(function() {
+        changeEvent(minRatio);
+    });
+    $("#nextCount").change(function() {
+        changeEvent(minRatio);
+    });
+    $("#nextPrice").change(function() {
+        changeEvent(minRatio);
+    });
+
+});
+//输入变化 联动
+function changeEvent(minRatio) {
+    var firstCount = $("#firstCount").val();
+    var firstPrice = $("#firstPrice").val();
+    var nextCount = $("#nextCount").val();
+    var nextPrice = $("#nextPrice").val();
+
+    if (firstCount != null && firstCount.indexOf(".")>0){
+        $("#firstCount").val(null);
+        Common.info("数量必须为整数");
+    }
+    if (nextCount != null && nextCount.indexOf(".")>0){
+        $("#nextCount").val(null);
+        Common.info("数量必须为整数");
+    }
+
+    if (firstCount!=null && firstPrice!=null && nextCount!=null && nextPrice!= null){
+        $("#minRatioSpan").text(firstCount+'件'+firstPrice+'消费金，每增加'+nextCount+'件，加'+nextPrice+'消费金');
+    }
+}
+</script>

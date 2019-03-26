@@ -1,0 +1,48 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopConsumeGoodsOrder/"}){ -->
+
+<form class="layui-form layui-form-pane" id="logisticForm">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">物流公司</label>
+        <div class="layui-input-inline">
+            <select name="logisticsCompany" lay-filter="aihao" id="logisticsCompany" lay-verify="required">
+                <option value="">请选择</option>
+                <option value="中通">中通</option>
+                <option value="顺丰">顺丰</option>
+                <option value="申通">申通</option>
+                <option value="圆通">圆通</option>
+                <option value="天天">天天</option>
+                <option value="韵达">韵达</option>
+                <option value="EMS">EMS</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">运单号</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="logisticsNum" name="logisticsNum" lay-verify="required" value="${shopConsumeGoodsOrderVo.logisticsNum}"   class="layui-input" >
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" name="id" value=${shopConsumeGoodsOrderVo.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['logisticInfo'], function(){
+    var logisticInfo = layui.logisticInfo
+    logisticInfo.init();
+
+    var value='${shopConsumeGoodsOrderVo.logisticsCompany}';
+    $("#logisticsCompany").val(value);
+    layui.form.render('select');
+
+});
+</script>

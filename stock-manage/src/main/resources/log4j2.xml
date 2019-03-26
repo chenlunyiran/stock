@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration  strict="true" status="DEBUG" monitorInterval="300">
+    <properties>
+        <property name="APP_NAME">shop-manage</property>
+        <property name="LOG_PATH">logs/${APP_NAME}</property>
+    </properties>
+    <Appenders>
+        <Console name="STDOUT_C" target="SYSTEM_OUT">
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+           <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [${APP_NAME}] [%t] [%-5level] [%class{18}(%L)] [msg= %msg%xEx%n"/>
+        </Console>
+        <RollingFile name="LOG_FILE" fileName="${LOG_PATH}/info.log" append="true"
+                     filePattern="${LOG_PATH}/info.log._%d{yyyy-MM-dd}">
+           <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [${APP_NAME}] [%t] [%-5level] [%class{18}(%L)] [msg= %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <!--优先级从高到低依次为：OFF、FATAL、ERROR、WARN、INFO、DEBUG、TRACE、 ALL-->
+        <root level="ERROR">
+            <appender-ref ref="STDOUT_C"/>
+            <appender-ref ref="LOG_FILE"/>
+        </root>
+        <logger name="com.twotiger" level="ALL" >
+            <appender-ref ref="STDOUT_C"/>
+            <appender-ref ref="LOG_FILE"/>
+        </logger>
+        <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="DEBUG" additivity="false">
+            <appender-ref ref="STDOUT_C"/>
+            <appender-ref ref="LOG_FILE"/>
+        </logger>
+        <logger name="system" level="DEBUG" additivity="false">
+            <appender-ref ref="STDOUT_C"/>
+            <appender-ref ref="LOG_FILE"/>
+        </logger>
+    </Loggers>
+</Configuration>

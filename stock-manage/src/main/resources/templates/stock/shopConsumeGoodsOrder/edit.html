@@ -1,0 +1,163 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopConsumeGoodsOrder/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">客户ID</label>
+				<div class="layui-input-inline">
+					<input type="text" id="customerId" name="customerId"  value="${shopConsumeGoodsOrder.customerId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">商品ID</label>
+				<div class="layui-input-inline">
+					<input type="text" id="goodsId" name="goodsId"  value="${shopConsumeGoodsOrder.goodsId}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">售卖价格</label>
+				<div class="layui-input-inline">
+					<input type="text" id="price" name="price"  value="${shopConsumeGoodsOrder.price}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">购买数量</label>
+				<div class="layui-input-inline">
+					<input type="text" id="count" name="count"  value="${shopConsumeGoodsOrder.count}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">支付状态</label>
+				<div class="layui-input-inline">
+					<input type="text" id="status" name="status"  value="${shopConsumeGoodsOrder.status}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">支付订单号</label>
+				<div class="layui-input-inline">
+					<input type="text" id="payOrderId" name="payOrderId"  value="${shopConsumeGoodsOrder.payOrderId}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">商品订单号</label>
+				<div class="layui-input-inline">
+					<input type="text" id="consumeGoodsOrderId" name="consumeGoodsOrderId"  value="${shopConsumeGoodsOrder.consumeGoodsOrderId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">兑换规则</label>
+				<div class="layui-input-inline">
+					<input type="text" id="exchangeRule" name="exchangeRule"  value="${shopConsumeGoodsOrder.exchangeRule}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">物流公司</label>
+				<div class="layui-input-inline">
+					<input type="text" id="logisticsCompany" name="logisticsCompany"  value="${shopConsumeGoodsOrder.logisticsCompany}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">物流单号</label>
+				<div class="layui-input-inline">
+					<input type="text" id="logisticsNum" name="logisticsNum"  value="${shopConsumeGoodsOrder.logisticsNum}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">收货地址id</label>
+				<div class="layui-input-inline">
+					<input type="text" id="collectGoodAddressId" name="collectGoodAddressId"  value="${shopConsumeGoodsOrder.collectGoodAddressId}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">是否退还运费</label>
+				<div class="layui-input-inline">
+					<input type="text" id="reFreight" name="reFreight"  value="${shopConsumeGoodsOrder.reFreight}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">退还运费金额</label>
+				<div class="layui-input-inline">
+					<input type="text" id="reFreightAmount" name="reFreightAmount"  value="${shopConsumeGoodsOrder.reFreightAmount}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">退货原因</label>
+				<div class="layui-input-inline">
+					<input type="text" id="backReason" name="backReason"  value="${shopConsumeGoodsOrder.backReason}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">退货时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="backTime" name="backTime"  value="${shopConsumeGoodsOrder.backTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createTime" name="createTime"  value="${shopConsumeGoodsOrder.createTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">更新时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="updateTime" name="updateTime"  value="${shopConsumeGoodsOrder.updateTime,"yyyy-MM-dd"}"   class="layui-input input-date" >
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+					<input type="text" id="remark" name="remark"  value="${shopConsumeGoodsOrder.remark}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+	<input type="hidden" name="delFlag" value=${shopConsumeGoodsOrder.delFlag} />
+    <input type="hidden" name="id" value=${shopConsumeGoodsOrder.id} />
+    <layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+    var shopConsumeGoodsOrderEdit = layui.edit
+    shopConsumeGoodsOrderEdit.init();
+});
+</script>

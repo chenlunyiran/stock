@@ -1,0 +1,39 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/stock/shopGoodsInfo/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<div class="layui-btn-group">
+    <layui:accessButton function="shop.shopGoodsInfo.grounding"  action="grounding">上架</layui:accessButton>
+    <layui:accessButton function="shop.shopGoodsInfo.undercarriage"  action="undercarriage">下架</layui:accessButton>
+    <layui:accessButton function="shop.shopGoodsInfo.out"  action="out">售罄</layui:accessButton>
+    <layui:accessButton function="shop.shopGoodsInfo.stick"  action="stick">修改置顶</layui:accessButton>
+    <layui:accessButton function="shop.shopGoodsInfo.edit"  action="edit">售卖规则</layui:accessButton>
+    <!--  <layui:accessButton function="shopGoodsInfo.exportDocument"  action="exportDocument">导出</layui:accessButton>
+     <layui:accessButton function="shopGoodsInfo.importDocument"  action="importDocument">导入</layui:accessButton>-->
+</div>
+
+<table id="shopGoodsInfoTable" lay-filter="shopGoodsInfoTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+/* tips提示 */
+$('#table-button-grounding').on('mouseover', function(){
+  var that = this;
+  layer.tips('商品上架后可供用户购买',that ,{
+    tips:[3,"#009E94"],
+    time:1500
+  }); //在元素的事件回调体中，follow直接赋予this即可
+});
+$('#table-button-undercarriage').on('mouseover', function(){
+	  var that = this;
+	  layer.tips('商品下架后用户无法购买',that ,{
+	    tips:[3,"#009E94"],
+	    time:1500
+	  }); //在元素的事件回调体中，follow直接赋予this即可
+});
+</script>

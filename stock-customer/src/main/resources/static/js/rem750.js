@@ -1,0 +1,2 @@
+$(document).ready(function(){var width = $(window).width();var fontSize;if(!(width < 750)) {fontSize = "100px"} else {fontSize = width / 750 * 100 + "px"};$("html").css("font-size", fontSize);})
+$(window).resize(function(){var width = $(window).width();var fontSize;if(!(width < 750)) {fontSize = "100px"} else {fontSize = width / 750 * 100 + "px"};$("html").css("font-size", fontSize);});

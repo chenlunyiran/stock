@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>身份验证</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="format-detection" content="email=no" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/css/touch.css">
+    <script type="text/javascript">
+        var whitchFrom="${whitchFrom!}";
+        var goodsId="${goodsId!}";
+        var shopperId="${shopperId!}";
+        var addressId="${addressId!}";
+
+    </script>
+        <script src="/js/jquery-1.8.3.js"></script>
+        <script src="/js/rem750.js"></script>
+        <script src="/js/common/auth.js"></script>
+        <script src="/js/toast.js" type="text/javascript" charset="utf-8"></script>
+        <link href="/css/toast.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="/css/animate.css"/>
+        <style>
+            .authentication{padding-top:.69rem;/*min-height: 100%;*/-webkit-box-sizing: border-box;box-sizing: border-box;background: white;}
+            .autCont{width:6.7rem;margin:0 auto;position: relative;height:1.2rem;display: -webkit-box;display: -ms-flexbox;display: flex;
+                font-size:.32rem;align-items: center;}
+            .autCont:after{width:100%;height:1px;background:rgba(90,88,100,.15);bottom:0;left:0;content: "";position: absolute;
+                -ms-transform: scaleY(0.5);
+                transform: scaleY(0.5);-webkit-transform: scaleY(0.5)}
+            .aut_lt{width:1.68rem;color:#333;}
+            .aut_rt{color:#333;}
+            .greyColor{background: white;color:#333 !important;}
+
+            .mb101{margin-bottom:1.01rem;}
+        </style>
+</head>
+<body>
+	<div class="flex-outer">
+	<!--header-->
+    	<div class="zzg-header px-border-bttom">
+            @if(isNotEmpty(whitchFrom) && whitchFrom == "choose" ){
+            <div class="back"  onclick="window.location.href='/rushBuy?id=${goodsId!}&shopperId=${shopperId!}&addressId=${addressId!}'">
+            @}else if(isNotEmpty(whitchFrom) && whitchFrom == "wangji"){
+            <div class="back"  onclick="window.location.href='/own/orderList'">
+            @}else{
+            <div class="back"  onclick="window.location.href='/own/home'">
+            @}
+				 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <polyline points="12,26 4,17 12,8" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+                 </svg>
+			</div>
+			<div class="text">身份验证</div>
+			<!--<a class="tag" href="addAdress.html">新增</a>-->
+    	</div>
+        <div class="scroll-content authentication">
+            <div class="autCont">
+                <p class="aut_lt">姓名</p>
+                <input id="name" name="name" placeholder="**婷（请输入完整姓名）" class="aut_rt" value="${name}" readonly="readonly" />
+            </div>
+            <div class="autCont">
+                    <p class="aut_lt">证件类型</p>
+                    <input class="aut_rt greyColor" value="身份证" readonly="readonly" />
+            </div>
+            <div class="autCont mb101">
+                    <p class="aut_lt">证件号</p>
+                    <input id="idCard" name="idCard" placeholder="请输入证件号" class="aut_rt" />
+            </div>
+           <!-- 按钮 -->
+           <a class="db orayButton tc" id="next">下一步</a>
+        </div>
+    </div>
+</body>
+</html>

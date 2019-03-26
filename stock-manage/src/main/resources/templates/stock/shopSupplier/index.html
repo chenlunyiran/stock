@@ -1,0 +1,22 @@
+<!--#layout("/common/layout.html",{"jsBase":"/js/stock/shopSupplier/"}){ -->
+<layui:searchForm formId="searchForm"  condition="${search}">
+</layui:searchForm>
+
+<div class="layui-btn-group">
+    <layui:accessButton function="shop.shopSupplier.add"  action="add">增加</layui:accessButton>
+    <layui:accessButton function="shop.shopSupplier.edit"  action="edit">编辑</layui:accessButton>
+    <layui:accessButton function="shop.shopSupplier.delete"  action="del">删除</layui:accessButton>
+     <!--<layui:accessButton function="shopSupplier.exportDocument"  action="exportDocument">导出</layui:accessButton>-->
+     <!--<layui:accessButton function="shopSupplier.importDocument"  action="importDocument">导入</layui:accessButton>-->
+</div>
+
+<table id="shopSupplierTable" lay-filter="shopSupplierTable"></table>
+<!--#} -->
+<script>
+
+layui.use(['index'], function(){
+    var index = layui.index
+    index.init();
+});
+
+</script>

@@ -1,0 +1,90 @@
+app:
+    name: stock-manager
+audit:
+    enable: false
+beetl:
+    suffix: html
+beetlsql:
+    basePackage: com
+    dataSource:
+        dbStyle: org.beetl.sql.core.db.MySqlStyle
+logging:
+    config: classpath:log4j2.xml
+server:
+    port: 8080
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    cache:
+        type: SIMPLE
+    datasource:
+        name: dataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: test1@34
+        url: jdbc:mysql://rm-2ze6s3yp67789ex92xo.mysql.rds.aliyuncs.com/shop_dev?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
+        username: root
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari:
+            auto-commit: true
+            connection-test-query: SELECT 2
+            connection-timeout: 30000
+            idle-timeout: 30000
+            max-lifetime: 1800000
+            maximum-pool-size: 16
+            minimum-idle: 5
+            pool-name: HikariCPPool
+    data:
+        jpa:
+          repositories:
+              enabled: true
+          database: MYSQL
+          database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+          generate-ddl: false
+          open-in-view: false
+          show-sql: false
+          properties:
+            hibernate:
+              ddl-auto: none
+              naming:
+                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+                physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    devtools:
+        restart:
+            exclude: static/**,templates/**
+    session:
+        store-type: 'HASH_MAP '
+    redis:
+        database: 3
+        timeout: 10000
+        host: 127.0.0.1
+        port: 6379
+        password: test.tt
+        pool:
+          max-active: 8
+          max-wait: -1
+          max-idle: 8
+          min-idle: 0
+
+mybatis:
+    config-location: classpath:MyBatis.xml
+    check-config-location: true
+    mapper-locations: classpath:mapper/*.xml
+    type-aliases-package: com.example.domain.model
+    type-handlers-package: com.example.typehandler
+    executor-type: REUSE
+mapper:
+    mappers:
+        - com.twotiger.stock.db.mybatis.NoExampleMapper
+    not-empty: false
+    identity: MYSQL
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+user:
+    id: 1
+    orgId: 1
+
+imgUrl:
+ prefix: http://tiger-stock-test.oss-cn-beijing.aliyuncs.com

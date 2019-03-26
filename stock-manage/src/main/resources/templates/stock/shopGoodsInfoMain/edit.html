@@ -1,0 +1,207 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/stock/shopGoodsInfoMain/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">编号</label>
+				<div class="layui-input-inline">
+					<input type="text" id="sku" style="background-color: lightgrey;" name="i.sku" readonly="readonly"  value="${shopGoodsInfoMain.sku}"   class="layui-input" >
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">商品名称</label>
+                <div class="layui-input-inline">
+                    <textarea  lay-verify="required" name="i.name" style="width: 1000px; min-height: 200px;"  required lay-verify="required" placeholder="请输入" class="layui-textarea">${shopGoodsInfoMain.name}</textarea>
+                    <!--<input type="text" id="name" style="width: 200px;height: 50px" lay-verify="required" name="i.name"  value="${shopGoodsInfoMain.name}"   class="layui-input" >-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label style="width: 140px" class="layui-form-label">供应商商品编号</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="thirdNo" name="i.thirdNo"  value="${shopGoodsInfoMain.thirdNo}"   class="layui-input" >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+
+            <div class="layui-inline" lay-filter="supplySelect">
+                <label class="layui-form-label">供应商</label>
+                <div class="layui-input-inline">
+                    <select id="supplySelect" lay-verify="required" value="${shopGoodsInfoMain.supplierId}" name="i.supplierId">
+                        <option value="">请选择供应商</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="layui-inline" lay-filter="categorySelect">
+                <label class="layui-form-label">类别</label>
+                <div class="layui-input-inline">
+                    <select id="categorySelect" lay-verify="required" name="i.categoryId" value="${shopGoodsInfoMain.categoryId}" >
+                        <option value="">请选择类别</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">进价</label>
+				<div class="layui-input-inline">
+					<input type="text" id="purchasePrice" lay-verify="required|number" name="i.purchasePrice"  value="${shopGoodsInfoMain.purchasePrice}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">售价</label>
+				<div class="layui-input-inline">
+					<input type="text" id="sellPrice" lay-verify="required|number|checkMoreZero|checkSellPrice" name="i.sellPrice"  value="${shopGoodsInfoMain.sellPrice}"   class="layui-input" >
+				</div>
+                <div class="layui-inline">
+                    <div class="layui-inline layui-form-mid layui-word-aux">（兑付比例不低于 1:${minRatio}<span style="color: red" id="minRatioSpan"></span>)</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">库存量</label>
+				<div class="layui-input-inline">
+					<input type="text" id="totalQuantity" lay-verify="required|number|checkMoreZero" name="i.totalQuantity"  value="${shopGoodsInfoMain.totalQuantity}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">可用库存量</label>
+				<div class="layui-input-inline">
+					<input type="text" id="avaliableQuantity" lay-verify="required|number|checkMoreZero|checkAvaliable" name="i.avaliableQuantity"  value="${shopGoodsInfoMain.avaliableQuantity}"   class="layui-input" >
+				</div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">冻结库存量</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="frozenQuantity" style="background-color: lightgrey;" readonly="readonly" name="i.frozenQuantity"  value="${shopGoodsInfoMain.frozenQuantity}"   class="layui-input" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <label class="layui-form-label">运费模板</label>
+            <div class="layui-inline" lay-filter="shopTransportTemplatesSelect">
+                <select id="shopTransportTemplatesSelect" lay-verify="required" name="r.transportId">
+                    <option value="">请选择运费模板</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>商品图片</legend>
+    </fieldset>
+    <div class="layui-row">
+        <div class="layui-upload">
+
+            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                预览图：
+                <div class="layui-upload-list" id="demo2"></div>
+            </blockquote>
+        </div>
+
+        <div class="layui-upload">
+            <button type="button" class="layui-btn layui-btn-sm" id="testList">选择多文件</button>
+            <div class="layui-upload-list">
+                <table class="layui-table">
+                    <thead>
+                    <tr><th>文件名</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr></thead>
+                    <tbody id="demoList">
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="layui-btn layui-btn-sm" id="testListAction">开始上传</button>
+        </div>
+    </div>
+
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>商品详情</legend>
+    </fieldset>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <!--<label class="layui-form-label"></label>-->
+            <textarea id="shopGoodsExtendArea" name="e.goodsDesc" style="display: none;" lay-verify="content">${shopGoodsInfoMain.goodsDesc}</textarea>
+        </div>
+    </div>
+
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+				<div class="layui-input-inline">
+                    <textarea type="text" style="width: 1000px; min-height: 200px;" id="remark" name="i.remark" class="layui-textarea" >${shopGoodsInfoMain.remark}</textarea>
+				</div>
+            </div>
+        </div>
+    </div>
+
+	<!-- 业务对象须有hidden字段，保存delFlag和version字段-->
+    <input type="hidden" value="${uuid}" name="uuid">
+    <input type="hidden" name="deleteFileIds">
+	<input type="hidden" name="i.delFlag" value=${shopGoodsInfoMain.delFlag} />
+	<input type="hidden" name="r.id" value=${shopGoodsInfoMain.ruleId} />
+	<input type="hidden" name="e.id" value=${shopGoodsInfoMain.extendId} />
+    <input type="hidden" name="i.id" value=${shopGoodsInfoMain.id} />
+    <input type="hidden" id="deleteFileIds" name="deleteFileIds"/>
+
+    <div class="layui-row">
+        <div class="layui-form-item" style="text-align: right;border-right: 10px;">
+            <button class="layui-btn layui-btn-danger" type="button" id="updateButton" lay-submit lay-filter="form">保存</button>
+            <button class="layui-btn" type="button" id="updateButton-cancel">取消</button>
+        </div>
+    </div>
+    <!--<layui:submitButtons id="updateButton" />-->
+</form>
+<!--#} -->
+<script>
+    var shopSuppliers = '${shopSuppliers}';
+    var shopGoodsCategories = '${shopGoodsCategories}';
+    var shopTransportTemplates = '${shopTransportTemplates}';
+
+    var t = '${shopGoodsInfoMain.transportId}';
+    var s = '${shopGoodsInfoMain.supplierId}';
+    var c = '${shopGoodsInfoMain.categoryId}';
+    var uuid = '${uuid}';
+    //初始化已经上传过的列表
+    var imgs = JSON.parse('${imgs}');
+
+    //定义全局变量，存储删除的旧图片
+    IMG_DELETE_LIST = [];
+layui.use(['edit','upload','layedit'], function(){
+    var shopGoodsInfoEdit = layui.edit
+    shopGoodsInfoEdit.init();
+});
+
+
+</script>
