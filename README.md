@@ -1,11 +1,11 @@
 # stock
 
 #### 项目介绍
-stoc为个人知识储备系统，也可作为公司小型项目使用
-码云请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+stock为个人知识储备系统，也可作为公司小型项目使用
+（码云后期维护）
 
 #### 软件架构
-软件架构说明
+软件架构说明（会一直完善）
 Springboot  Mybatis MySQL Layui Beetl Redis Rocketmq(ONS) xxl-job
 
 #### 安装教程
