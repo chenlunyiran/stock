@@ -7,7 +7,7 @@
 
 #### 软件架构
 软件架构说明
-Springboot  Mybatis MySQL Layui Beetl Redis Rocketmq（） xxl-job
+Springboot  Mybatis MySQL Layui Beetl Redis Rocketmq（ONS） xxl-job
 
 #### 安装教程
 
