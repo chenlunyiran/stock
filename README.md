@@ -4,6 +4,8 @@
 stock为个人知识储备系统，也可作为公司小型项目使用
 （码云后期维护）
 
+技术博客：https://blog.csdn.net/wjh928908140
+
 #### 软件架构
 软件架构说明（会一直完善）
 Springboot  Mybatis MySQL Layui Beetl Redis Rocketmq(ONS) xxl-job
